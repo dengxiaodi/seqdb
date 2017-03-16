@@ -1,0 +1,169 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+
+            <form  method="post" action="__URL__/update/sid/{$sample['id']}">
+                <fieldset id="InputsWrapper">
+                    <legend><strong>修改样品信息</strong></legend>
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bs-callout bs-callout-info">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label> 样品编号: </label>
+                                            <input type="text" class="form-control" name="sampleid" value="{$sample['sampleid']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>样品类型: </label>
+                                            <input type="text" class="form-control" name="type" value="{$sample['type']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>样品来源: </label>
+                                            <input type="text" class="form-control" name="source" value="{$sample['source']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>样品名称: </label>
+                                            <input type="text" class="form-control" name="name" value="{$sample['name']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>样品描述: </label>
+                                            <input type="text" class="form-control" name="description" value="{$sample['description']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>提取时间：</label>
+                                            <input size="19" type="text" readonly class="form-control timeer" name="obtain_time" value="{:time_format($sample['obtain_time'],"Y-m-d")}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>剩余样品量: </label>
+                                            <input type="text" class="form-control" name="remain" value="{$sample['remain']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>核酸类型: </label>
+                                            <input type="text" class="form-control" name="nucleic_acid" value="{$sample['nucleic_acid']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>提取方法: </label>
+                                            <input type="text" class="form-control" name="method" value="{$sample['method']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>核酸浓度：</label>
+                                            <input type="text" class="form-control" name="concentration" value="{$sample['concentration']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>核酸总体积: </label>
+                                            <input type="text" class="form-control" name="amount" value="{$sample['amount']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>核酸质量: </label>
+                                            <input type="text" class="form-control" name="mass" value="{$sample['mass']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>使用体积：</label>
+                                            <input type="text" class="form-control" name="used_volume" value="{$sample['used_volume']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>使用质量：</label>
+                                            <input type="text" class="form-control" name="used_mass" value="{$sample['used_mass']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>剩余质量: </label>
+                                            <input type="text" class="form-control" name="rest" value="{$sample['rest']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-inline">
+                                            <label>核酸提取时间: </label>
+                                            <input size="32" type="text" readonly class="form-control timeer" name="extraction_data" value="{:time_format($sample['extraction_data'],"Y-m-d")}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-inline">
+                                            <label> 备 注:  </label>
+                                            <input size="50" type="text" class="form-control" name="comment" value="{$sample['comment']}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+                <fieldset>
+                    <div class="row">
+                            <input type="hidden" name="id" value="{$sample['id']}" /> 
+                            <button type="submit" class="btn btn-primary pull-right ">提交</button>
+                    </div>
+                    
+                </fieldset>
+
+            </form>
+        </div>
+        
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        $(".timeer").datetimepicker(
+            {format: 'yyyy-mm-dd', 
+            startView:2, 
+            todayBtn: true, 
+            autoclose: true,
+            minView: 2, 
+            clearBtn:true}
+            );
+    </script>
+    </body>
+</html>

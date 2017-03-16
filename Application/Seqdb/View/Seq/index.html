@@ -1,0 +1,67 @@
+<include file="Public/header"/>
+        <div class="container">
+            <div class="row">
+            <div class="col-md-6">
+                <h1>送样总览</h1>
+            </div>
+
+            <div class="col-md-6">
+                <a class="btn btn-info pull-right" style="margin-top: 30px;" href="__URL__/add" role="button">添加送样信息</a>
+            </div>
+            <div class="col-md-12"><hr></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                        
+                        <thead>
+                            <tr><th class="text-center">送样编号</th><th class="text-center">测序公司</th><th class="text-center">送样时间</th><th class="text-center">送样文库数目</th><th class="text-center">备注</th><th class="text-center">送样人员</th><th class="text-center">操作</th></tr>
+                        </thead>
+                        
+                        <tbody class="text-center" >
+                            <foreach name="seq" item="obj">
+                            <tr>
+                                <td>{$obj['seq_id']}</td>
+                                <td>{$obj['company']}</td>
+                                <td>{:time_format($obj['send_data'],"Y-m-d")}</td>
+                                <td>{:get_seqlib_count($obj['seq_id'])}</td>
+                                <td>{$obj['comment']}</td>
+                                <td>{:get_nickname($obj['operator'])}</td>
+                                <td><a href="__URL__/detail/sid/{$obj.id}">详情</a> <eq name="obj['operator']" value="$uid"> | <a href="__URL__/update/sid/{$obj.id}">修改</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a></eq></td>
+                            </tr>
+                            </foreach>
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <hr>
+
+            <footer>
+                <p>&copy; Company 2014</p>
+            </footer>
+        </div> <!-- /container -->
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+        <script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+                $('#datatable').DataTable({"order":[[0,"desc"]],
+            });
+            } );
+        </script>
+    </body>
+</html>

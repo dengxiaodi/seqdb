@@ -1,0 +1,170 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+
+            <form  method="post" action="__URL__/update">
+                <fieldset id="InputsWrapper">
+                    <legend><strong>送样信息</strong></legend>
+
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bs-callout bs-callout-info">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label> 送样编号: </label>
+                                            <input type="text" class="form-control text-center" name="seq_id" value="{$seqinfo['seq_id']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>测序公司: </label>
+                                            <input type="text" class="form-control text-center" name="company" value="{$seqinfo['company']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>送样时间: </label>
+                                            <input  type="text" readonly class="form-control text-center timeer" name="send_date" value="{:time_format($seqinfo['send_date'],'Y-m-d')}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-inline">
+                                            <label>送样备注: </label>
+                                            <input size="20" type="text" class="form-control text-center" name="seq_comment" value="备注">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="sid" value="{$seqinfo['id']}" /> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <foreach name="seqlib" item="seqlib">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="bs-callout bs-callout-danger">
+                                <h4>文库编号 {$seqlib['lib_id']}</h4>
+                                <hr>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group form-inline">
+                                                <label> 文库编号: </label>
+                                                <select class="selectpicker" name="lib_id[]" data-hide-disabled="true" data-live-search="true" data-width="210px">
+                                                    
+                                                    <eq name="seqlib[lib_id]" value="none">
+                                                        <option value="none" selected>文库不在本数据库</option>
+                                                    <else/>
+                                                        <option value="none">文库不在本数据库</option>
+                                                    </eq>
+                                                    <foreach name="library" item="obj" >
+                                                        <eq name="obj['lib_id']" value="$seqlib['lib_id']">
+                                                        <option value="{$obj.lib_id}" selected>文库ID: {$obj.lib_id} -- 描述：{$obj.description}</option>
+                                                        <else/>
+                                                        <option value="{$obj.lib_id}">文库ID: {$obj.lib_id} -- 描述：{$obj.description}</option>
+                                                        </eq>
+                                                    </foreach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-inline">
+                                                <label>测序平台: </label>
+                                                <input type="text" class="form-control text-center" name="platform[]" value="{$seqlib['platform']}" size = "24">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-inline">
+                                                <label>测序类型: </label>
+                                                <input type="text" class="form-control text-center" name="seqtype[]" value="{$seqlib['seqtype']}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-inline">
+                                                <label>送样量: </label>
+                                                <input type="text" class="form-control text-center" name="lib_volume[]" value="{$seqlib['lib_volume']}"> uL
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-inline">
+                                                <label>公司Qubit2.0质检浓度: </label>
+                                                <input type="text" class="form-control text-center" name="conc_qubit[]" value="{$seqlib['conc_qubit']}" size="12"> ng/uL
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-inline">
+                                                <label>公司qPCR质检浓度: </label>
+                                                <input type="text" class="form-control text-center" name="conc_qpcr[]" value="{$seqlib['conc_qpcr']}" size="11"> nM
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-inline">
+                                                <label>公司2100测得峰值: </label>
+                                                <input type="text" class="form-control text-center" name="peak[]" value="{$seqlib['peak']}" size="9" > bp
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-inline">
+                                                <label>备注 : </label>
+                                                <input size="28" type="text" class="form-control text-center" name="comment[]" value="{$seqlib['comment']}">
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="seqlib_id[]" value="{$seqlib['id']}" /> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </foreach>
+
+                </fieldset>
+
+
+                <fieldset>
+                    <div class="row">
+                            <button type="submit" class="btn btn-primary pull-right ">提交</button>
+                    </div>
+                    
+                </fieldset>
+
+            </form>
+        </div>
+        
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        $(".timeer").datetimepicker(
+            {format: 'yyyy-mm-dd', 
+            startView:2, 
+            todayBtn: true, 
+            autoclose: true,
+            minView: 2, 
+            clearBtn:true}
+            );
+    </script>
+
+    </body>
+</html>

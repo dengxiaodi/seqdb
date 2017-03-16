@@ -1,0 +1,147 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4><b>送样概况</b></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary btn-block" style="margin-top: 5px;">送样编号：{$seq['seq_id']} </button>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary btn-block" style="margin-top: 5px;">测序公司：{$seq['company']} </button>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary btn-block" style="margin-top: 5px;">送样时间：{:time_format($seq['send_date'],"Y-m-d")}</button>
+                        </div>
+
+                        <notempty name="seq['comment']">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-warning btn-block" style="margin-top: 20px;">备注信息：{$seq['comment']}</button>
+                        </div>
+                        </notempty>
+                     
+                        <div class="col-md-12" style="margin-top: 20px;">
+                            <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">文库编号</th>
+                                        <th class="text-center">测序平台</th>
+                                        <th class="text-center">测序类型</th>
+                                    </tr>
+                                </thead>             
+                                <tbody class="text-center" >
+                                    <foreach name="seqlibinfo" item="info">
+                                        <tr><td><a href="{:get_libinfo($info['lib_id'])}">{$info['lib_id']}</a></td><td>{$info['platform']}</td><td>{$info['seqtype']}</td></tr>
+                                    </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <foreach name="seqlibinfo" item="info">
+                <div class="col-md-12">
+                <div class="bs-callout bs-callout-info">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-inline">
+                                <label> 文库编号: </label>
+                                <input type="text" readonly class="form-control text-center" value="{$info['lib_id']}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-inline">
+                                <label> 测序平台: </label>
+                                <input type="text" readonly class="form-control text-center" value="{$info['platform']}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-inline">
+                                <label> 测序类型: </label>
+                                <input type="text" readonly class="form-control text-center" value="{$info['seqtype']}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-inline">
+                                <label> 送样体积: </label>
+                                <input type="text" readonly class="form-control text-center" value="{$info['lib_volume']}" >
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-inline">
+                                <label> 公司Qubit质检浓度 : </label>
+                                <input type="text" readonly class="form-control text-center" value="{$info['conc_qubit']} (ng/uL)" size="10">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-inline">
+                                <label> 公司qPCR质检浓度 : </label>
+                                <input type="text" readonly class="form-control text-center" value="{$info['conc_qpcr']} (nM)" size="10">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-inline">
+                                <label> 2100检测峰值 : </label>
+                                <input type="text" readonly class="form-control text-center" value="{$info['peak']} bp" size="15">
+                            </div>
+                        </div>
+
+                        <notempty name="info['comment']">
+                        <div class="col-md-8">
+                            <div class="form-group form-inline">
+                                <label> 备注 : </label>
+                                <input type="text" readonly class="form-control text-center" value="{$info['comment']}" size="77">
+                            </div>
+                        </div>
+                        </notempty>
+                    </div>
+                </div>
+            </div>
+
+            </foreach>
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <eq name="seq['operator']" value="$uid">
+                <a class="btn btn-info" style="margin-top: 30px; margin-left: 180px;" href="__URL__/update/sid/{$seq['id']}" role="button" target="_blank">修改样本信息</a>
+                <a class="btn btn-danger" style="margin-top: 30px; margin-left: 20px;" href="__URL__/del/sid/{$seq['id']}" role="button" target="_blank">删除此样本</a> </eq>
+                <a class="btn btn-primary pull-right" style="margin-top: 30px;" href="__URL__/index" role="button">返回样本列表</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function() {
+            $('#datatable').DataTable({paging: false,ordering:  false
+        });
+        } );
+    </script>
+    </body>
+</html>

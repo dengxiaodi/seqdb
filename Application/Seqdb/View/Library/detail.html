@@ -1,0 +1,73 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary btn-lg" style="margin-top: 30px;" href="__URL__/index" role="button">返回文库列表</a>
+        </div>
+        <div class="col-md-12">
+            <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                <thead>
+                    <tr><th class="text-center">项目</th><th class="text-center">描述</th></tr>
+                </thead>             
+                <tbody class="text-center" >
+                    <tr><td>文库编号</td><td>{$library['lib_id']}</td></tr>
+                    <eq name="$library['sample_id']" value="none">
+                        <tr><td>样本编号</td><td>样本不在本数据库</td></tr>
+                    <else/>
+                        <tr><td>样本编号</td><td><a href="{:get_sampleinfo($library['sample_id'])}">{$library['sample_id']}</a></td></tr>
+                    </eq>
+                    <tr><td>文库描述</td><td>{$library['description']}</td></tr>
+                    <tr><td>建库试剂盒</td><td>{$library['kit']}</td></tr>
+                    <tr><td>PCR循环数</td><td>{$library['cycle_num']}</td></tr>
+                    <tr><td>起始模板质量</td><td>{$library['template_mass']}</td></tr>
+                    <tr><td>文库体积</td><td>{$library['lib_volume']}</td></tr>
+                    <tr><td>Qubit 2.0测定浓度</td><td>{$library['conc_qubit']}</td></tr>
+                    <tr><td>qPCR 测定浓度</td><td>{$library['conc_qpcr']}</td></tr>
+                    <tr><td>2100测定峰值</td><td>{$library['peak']}</td></tr>
+                    <tr><td>建库时间</td><td>{:time_format($library['create_date'],"Y-m-d")}</td></tr>
+                    <tr><td>建库人</td><td>{:get_nickname($library['operator'])}</td></tr>
+                    <tr><td>创建信息时间</td><td>{:time_format($library['create_time'],"Y-m-d")}</td></tr>
+                    <tr><td>更新信息时间</td><td>{:time_format($library['update_time'],"Y-m-d")}</td></tr>
+                    <tr><td>备注信息</td><td>{$library['comment']}</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <eq name="library['operator']" value="$uid">
+            <a class="btn btn-primary" style="margin-top: 30px; margin-left: 180px;" href="__URL__/update/sid/{$sample['id']}" role="button" target="_blank">修改文库信息</a>
+            <a class="btn btn-danger" style="margin-top: 30px; margin-left: 20px;" href="__URL__/del/sid/{$sample['id']}" role="button" target="_blank">删除此文库</a> </eq>
+            <a class="btn btn-primary pull-right" style="margin-top: 30px;" href="__URL__/index" role="button">返回文库列表</a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function() {
+            $('#datatable').DataTable({paging: false,ordering:  false
+        });
+        } );
+    </script>
+    </body>
+</html>

@@ -1,0 +1,158 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+
+            <form  method="post" action="__URL__/update/sid/{$sample['id']}">
+                <fieldset id="InputsWrapper">
+                    <legend><strong>修改文库信息</strong></legend>
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bs-callout bs-callout-info">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label> 文库编号: </label>
+                                            <input type="text" class="form-control" name="lib_id" value="{$library['lib_id']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label> 文库描述: </label>
+                                            <input type="text" class="form-control" name="description" value="{$library['description']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label> 建库试剂: </label>
+                                            <input type="text" class="form-control" name="kit" value="{$library['kit']}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>样品编号: </label>
+                                            <select class="selectpicker" name="sample_id" data-hide-disabled="true" data-live-search="true" title="请选择样本来源">
+                                                <option value="none">样本不在本数据库</option>
+                                                <foreach name="sampleid" item="sample" >
+                                                    <eq name="sample['sampleid']" value="$library['sample_id']">
+                                                        <option value="{$sample['sampleid']}" selected>Sample ID:{$sample['sampleid']} Type:{$sample['type']} Name:{$sample['name']} Source:{$sample['source']} Nucleic_acid:{$sample['nucleic_acid']}</option> 
+                                                    <else/>
+                                                        <option value="{$sample['sampleid']}">Sample ID:{$sample['sampleid']} Type:{$sample['type']} Name:{$sample['name']} Source:{$sample['source']} Nucleic_acid:{$sample['nucleic_acid']}</option>
+                                                    </eq>
+                                                    
+                                                </foreach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>建库时间: </label>
+                                            <input  type="text" readonly class="form-control timeer" name="create_date" value="{:time_format($library['create_date'],"Y-m-d")}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>PCR循环数: </label>
+                                            <input type="text" class="form-control" name="cycle_num" value="{$library['cycle_num']}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>模板质量: </label>
+                                            <input type="text" class="form-control" name="template_mass" value="{$library['template_mass']}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>文库体积: </label>
+                                            <input type="text" class="form-control" name="lib_volume" value="{$library['lib_volume']}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>Qubit浓度: </label>
+                                            <input type="text" class="form-control" name="conc_qubit" value="{$library['conc_qubit']}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>qPCR浓度: </label>
+                                            <input type="text" class="form-control" name="conc_qpcr" value="{$library['conc_qpcr']}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>2100峰值: </label>
+                                            <input type="text" class="form-control" name="peak" value="{$library['peak']}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>备注: </label>
+                                            <input type="text" class="form-control" name="comment" value="{$library['comment']}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+                <fieldset>
+                    <div class="row">
+                            <input type="hidden" name="id" value="{$library['id']}" /> 
+                            <button type="submit" class="btn btn-primary pull-right ">提交</button>
+                    </div>
+                    
+                </fieldset>
+
+            </form>
+        </div>
+        
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        $(".timeer").datetimepicker(
+            {format: 'yyyy-mm-dd', 
+            startView:2, 
+            todayBtn: true, 
+            autoclose: true,
+            minView: 2, 
+            clearBtn:true}
+            );
+    </script>
+    </body>
+</html>

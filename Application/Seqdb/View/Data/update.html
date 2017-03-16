@@ -1,0 +1,252 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+
+            <form  method="post" action="__URL__/update">
+                <fieldset id="InputsWrapper">
+                    <legend><strong>数据信息 </strong></legend>
+
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bs-callout bs-callout-info">
+                                <legend> 请填写相关信息 </legend>
+                                
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                            <div class="form-group form-inline">
+                                                <label> 数据编号: </label>
+                                                <input type="text" class="form-control text-center" name="data_id" value="{$data['data_id']}" size="10">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                            <div class="form-group form-inline">
+                                                <label> 序列读长: </label>
+                                                <input type="text" class="form-control text-center" name="read_length" value="{$data['read_length']}" size="10">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                            <div class="form-group form-inline">
+                                                <label> 文件行数: </label>
+                                                <input type="text" class="form-control text-center" name="line_number" value="{$data['line_number']}" size="10">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                            <div class="form-group form-inline">
+                                                <label> MD5 值 : </label>
+                                                <input type="text" class="form-control text-center" name="md5" value="{$data['md5']}" size="10">
+                                            </div>
+                                    </div>
+ 
+                                    <div class="col-md-6">
+                                            <div class="form-group form-inline">
+                                                <label> 文件原名: </label>
+                                                <input type="text" class="form-control text-center" name="origin_name" value="{$data['origin_name']}" size="50">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                            <div class="form-group form-inline">
+                                                <label> 新文件名: </label>
+                                                <input type="text" class="form-control text-center" name="new_name" value="{$data['new_name']}" size="50">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>送样编号: </label>
+                                            <select class="selectpicker" name="seq_id" data-hide-disabled="true" data-live-search="true" title="请选择样本来源" data-width="200px" id="seqid">
+                                                <option value="00" >送样信息不在本数据库</option>
+                                                <foreach name='seqinfo' item='obj'>
+                                                    <eq name="obj['seq_id']" value="$data['seq_id']">
+                                                        <option value="{$obj['seq_id']}" selected>{$obj['seq_id']}</option>
+                                                    <else/>
+                                                        <option value="{$obj['seq_id']}">{$obj['seq_id']}</option>
+                                                    </eq>
+                                                    
+                                                </foreach>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>文库编号: </label>
+                                            <select class="selectpicker" name="lib_id" data-hide-disabled="true" data-live-search="true" title="请选择样本来源" data-width="200px" id="libid">
+                                            <option value="{$data['lib_id']}" selected>{$data['lib_id']}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>样品编号: </label>
+                                            <select class="selectpicker" disabled="true" name="sample_id" data-hide-disabled="true" data-live-search="true" data-width="200px" id="sampleid">
+                                            <option value="{$data['sample_id']}" selected>{$data['sample_id']}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group form-inline">
+                                            <label>文件状态: </label>
+                                            <select class="selectpicker" name="is_raw" data-hide-disabled="true" title="是否为rawdata" data-width="150px">
+                                                <switch name="data['is_raw']">
+                                                    <case value="0"><option value="0" selected>Raw data</option><option value="1">Clean data</option></case>
+                                                    <case value="1"><option value="0">Raw data</option><option value="1" selected>Clean data</option></case>
+                                                </switch>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group form-inline">
+                                            <label>read状态:</label>
+                                            <select class="selectpicker" name="read_order" data-hide-disabled="true" title="Read order" data-width="150px">
+                                                <switch name="data['read_order']">
+                                                    <case value="1"><option value="1" selected>Read 1</option><option value="2">Read 2</option><option value="3">Single end</option></case>
+                                                    <case value="2"><option value="1">Read 1</option><option value="2" selected>Read 2</option><option value="3">Single end</option></case>
+                                                    <case value="3"><option value="1">Read 1</option><option value="2">Read 2</option><option value="3" selected>Single end</option></case>
+                                                    <default /><option value="1">Read 1</option><option value="2">Read 2</option><option value="3">Single end</option>
+                                                </switch>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                            <div class="form-group form-inline">
+                                                <label> 云上存储: </label>
+                                                <input type="text" class="form-control text-center" name="cloudpath" value="{$data['cloudpath']}" size="15">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                            <div class="form-group form-inline">
+                                                <label> 本地存储: </label>
+                                                <input type="text" class="form-control text-center" name="localpath" value="{$data['localpath']}" size="15">
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                            <div class="form-group form-inline">
+                                                <label> 备注信息: </label>
+                                                <input type="text" class="form-control text-center" name="comment" value="{$data['comment']}">
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+                <fieldset>
+                    <div class="row">
+                        <input type="hidden" name="id" value="{$data['id']}" /> 
+                        <button type="submit" class="btn btn-primary pull-right ">提交</button>
+                    </div>
+                    
+                </fieldset>
+
+            </form>
+        </div>
+        
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+        $('#seqid').on('changed.bs.select', function (e) {
+            var objectModel = {};
+            var   value = $(this).val();
+            objectModel["seqid"] =value;
+            $.ajax({
+                        cache:false,
+                        type:"POST",
+                        url:"{:U('Data/libinforeturn/','','')}",
+                        dataType:"json",
+                        data:objectModel,
+                        timeout:3000,
+                        error:function(){
+                            alert("未能获得文库信息！");
+                        },
+                         success:function(data){
+                            
+                            if( data.length === 0){
+                                $("#libid").empty();
+                                $('#libid').append("<option value='00' selected> 文库未在本数据库 </option>");
+                                $('#libid').prop('disabled', true); 
+                                $("#libid").selectpicker('refresh');
+                                $("#sampleid").empty();
+                                $('#sampleid').append("<option value='00' selected> 样品未在本数据库 </option>");
+                                $('#sampleid').prop('disabled', true); 
+                                $("#sampleid").selectpicker('refresh');
+                            }else{
+                                $("#libid").empty();
+                                for (var i = 0; i < data.length; i++) {
+                                    $('#libid').append("<option value='"+data[i].lib_id+"'>"+data[i].lib_id+"--"+data[i].seqtype+"</option>");
+                                }
+                                $('#libid').prop('disabled', false);
+                                $("#libid").selectpicker('refresh');
+                            }                            
+                         }
+                     });            
+        });
+
+        $('#libid').on('changed.bs.select', function (e) {
+            var objectModel = {};
+            var   value = $(this).val();
+            objectModel["libid"] =value;
+            $.ajax({
+                        cache:false,
+                        type:"POST",
+                        url:"{:U('Data/sampleinforeturn/','','')}",
+                        dataType:"json",
+                        data:objectModel,
+                        timeout:3000,
+                        error:function(){
+                            alert("未能获得文库信息！");
+                        },
+                         success:function(data){
+                            $("#sampleid").empty();
+                            if( data.length === 0){
+                                $("#sampleid").empty();
+                                $('#sampleid').append("<option value='00' selected> 样本未在本数据库 </option>");
+                                $("#sampleid").selectpicker('refresh');
+                            }else{
+                                $("#sampleid").empty();
+                                for (var i = 0; i < data.length; i++) {
+                                    $('#sampleid').append("<option value='"+data[i].lib_id+"'>"+data[i].lib_id+"--"+data[i].seqtype+"</option>");
+                                }
+                                $("#sampleid").selectpicker('refresh');
+                            }
+                         }
+                     });            
+        });
+    </script>
+    </body>
+</html>

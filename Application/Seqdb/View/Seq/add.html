@@ -1,0 +1,206 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+
+            <form  method="post" action="__URL__/add">
+                <fieldset id="InputsWrapper">
+                    <legend><strong>送样信息</strong></legend>
+
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bs-callout bs-callout-info">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label> 送样编号: </label>
+                                            <input type="text" class="form-control" name="seq_id" placeholder="1" value="1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>测序公司: </label>
+                                            <input type="text" class="form-control" name="company" placeholder="测序公司">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>送样时间: </label>
+                                            <input  type="text" readonly class="form-control timeer" name="send_date" placeholder="建库时间">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-inline">
+                                            <label>送样备注: </label>
+                                            <input size="24" type="text" class="form-control" name="seq_comment" placeholder="备注">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a class="btn btn-info pull-right" style="margin-right: 30px;" href="#" role="button" id="AddMoreFileBox">添加一个文库</a>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bs-callout bs-callout-danger">
+                            <h4>文库序号 1</h4>
+                            <hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label> 文库编号: </label>
+                                            <select class="selectpicker" name="lib_id[]" data-hide-disabled="true" data-live-search="true" title="请选择文库来源" data-width="210px">
+                                                <option value="none">文库不在本数据库</option>
+                                                <foreach name="lib" item="obj" >
+                                                    <option value="{$obj.lib_id}">文库ID: {$obj.lib_id} -- 描述：{$obj.description}</option>
+                                                </foreach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>测序平台: </label>
+                                            <input type="text" class="form-control" name="platform[]" placeholder="seq platform" size = "24">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>测序类型: </label>
+                                            <input type="text" class="form-control" name="seqtype[]" placeholder="Seqtype">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>送样量: </label>
+                                            <input type="text" class="form-control" name="lib_volume[]" placeholder="送样量">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>公司Qubit2.0质检浓度: </label>
+                                            <input type="text" class="form-control" name="conc_qubit[]" placeholder="Conc. By Qubit2.0" size="12">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>公司qPCR质检浓度: </label>
+                                            <input type="text" class="form-control" name="conc_qpcr[]" placeholder="Conc. By qPCR" size="11">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-inline">
+                                            <label>公司2100测得峰值: </label>
+                                            <input type="text" class="form-control" name="peak[]" placeholder="peak by 2100" size="9" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-inline">
+                                            <label>备注 : </label>
+                                            <input size="28" type="text" class="form-control" name="comment[]" placeholder="备注">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <a class="btn btn-danger btn-xs pull-right removeclass" style="margin-right: 30px;" href="#" role="button">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+
+                <fieldset>
+                    <div class="row">
+                            <button type="submit" class="btn btn-primary pull-right ">提交</button>
+                    </div>
+                    
+                </fieldset>
+
+            </form>
+        </div>
+        
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+    <script>  
+
+    $(document).ready(function() {  
+      
+    var MaxInputs       = 100; //maximum input boxes allowed  
+    var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID  
+    var AddButton       = $("#AddMoreFileBox"); //Add button ID  
+      
+    var x = InputsWrapper.length; //initlal text box count  
+    var FieldCount=1; //to keep track of text box added  
+      
+    $(AddButton).click(function (e)  //on add input button click  
+    {  
+            if(x <= MaxInputs) //max input box allowed  
+            {  
+                FieldCount++; //text box added increment  
+                //add input box  
+
+                $(InputsWrapper).append('<div class="row"><div class="col-md-12"><div class="bs-callout bs-callout-danger"><h4>文库序号 '+ FieldCount +'</h4><hr><div class="row"><div class="col-md-4"><div class="form-group form-inline"><label> 文库编号: </label><select class="selectpicker" name="lib_id[]" data-hide-disabled="true" data-live-search="true" title="请选择文库来源" data-width="210px"><option value="none">文库不在本数据库</option><foreach name="lib" item="obj" ><option value="{$obj.lib_id}">文库ID: {$obj.lib_id} -- 描述：{$obj.description}</option></foreach></select></div></div><div class="col-md-4"><div class="form-group form-inline"><label>测序平台: </label><input type="text" class="form-control" name="platform[]" placeholder="seq platform" size = "24"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>测序类型: </label><input type="text" class="form-control" name="seqtype[]" placeholder="Seqtype"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>送样量: </label><input type="text" class="form-control" name="lib_volume[]" placeholder="送样量"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>公司Qubit2.0质检浓度: </label><input type="text" class="form-control" name="conc_qubit[]" placeholder="Conc. By Qubit2.0" size="12"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>公司qPCR质检浓度: </label><input type="text" class="form-control" name="conc_qpcr[]" placeholder="Conc. By qPCR" size="11"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>公司2100测得峰值: </label><input type="text" class="form-control" name="peak[]" placeholder="peak by 2100" size="9" ></div></div><div class="col-md-6"><div class="form-group form-inline"><label>备注 : </label><input size="28" type="text" class="form-control" name="comment[]" placeholder="备注"></div></div></div><div class="row"><a class="btn btn-danger btn-xs pull-right removeclass" style="margin-right: 30px;" href="#" role="button">删除</a></div></div></div></div>');  
+                $(".selectpicker").selectpicker();
+                $(".timeer").datetimepicker(
+                    {format: 'yyyy-mm-dd', 
+                    startView:2, 
+                    todayBtn: true, 
+                    autoclose: true,
+                    minView: 2, 
+                    clearBtn:true}
+                    ); 
+                x++; //text box increment  
+            }  
+    return false;  
+    });  
+      
+    $("body").on("click",".removeclass", function(e){ //user click on remove text  
+            if( x > 1 ) {  
+                    $(this).parent('div').parent('div').remove(); //remove text box  
+                    x--; //decrement textbox  
+            }  
+    return false;  
+    })   
+      
+    });  
+    </script>
+    <script type="text/javascript">
+        $(".timeer").datetimepicker(
+            {format: 'yyyy-mm-dd', 
+            startView:2, 
+            todayBtn: true, 
+            autoclose: true,
+            minView: 2, 
+            clearBtn:true}
+            );
+    </script>
+
+    </body>
+</html>

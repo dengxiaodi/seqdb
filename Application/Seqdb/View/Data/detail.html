@@ -1,0 +1,106 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary btn-lg" style="margin-top: 30px;" href="__URL__/index" role="button">返回数据列表</a>
+        </div>
+        <div class="col-md-12">
+            <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                <thead>
+                    <tr><th class="text-center">项目</th><th class="text-center">描述</th></tr>
+                </thead>             
+                <tbody class="text-center" >
+                    <tr><td>数据编号</td><td>DataID: {$data['data_id']}</td></tr>
+                    <eq name="data['seq_id']" value="00">
+                        <tr><td>送样编号</td><td>未收录</td></tr>
+                    <else/>
+                        <tr><td>送样编号</td><td><a href="{:get_seqinfo($data['seq_id'])}">SeqID: {$data['seq_id']}</a></td></tr>
+                    </eq>
+
+                    <eq name="data['lib_id']" value="00">
+                        <tr><td>文库编号</td><td>未收录</td></tr>
+                    <else/>
+                        <tr><td>文库编号</td><td><a href="{:get_libinfo($data['lib_id'])}">LibID: {$data['lib_id']}</a> </td></tr>
+                    </eq>
+
+                    <eq name="data['sample_id']" value="00">
+                        <tr><td>样本编号</td><td>未收录</td></tr>
+                    <else/>
+                        <tr><td>样本编号</td><td><a href="{:get_sampleinfo($data['sample_id'])}">SampleID: {$data['sample_id']}</a></td></tr>
+                    </eq>
+                    
+                    <tr><td>原文件名</td><td>{$data['origin_name']}</td></tr>
+                    <tr><td>新文件名</td><td>{$data['new_name']}</td></tr>
+                    <tr><td>md5</td><td>{$data['md5']}</td></tr>
+                    <tr><td>读长</td><td>{$data['read_length']} bp</td></tr>
+                    <tr><td>行数</td><td>{$data['line_number']}</td></tr>
+                    <tr><td>数据量</td><td>{$data['amount']} G</td></tr>
+                    <tr><td>是否为原始数据</td>
+                        <td>
+                            <switch name="data['is_raw']">
+                                <case value="0">Raw Data</case>
+                                <case value="1">Clean Data</case>
+                            </switch></td>
+                        </td>
+                    </tr>
+                    <tr><td>Read状态</td>
+                        <td>
+                        <switch name="obj['read_order']">
+                            <case value="1">Read 1</case>
+                            <case value="2">Read 2</case>
+                            <case value="3">Single End</case>
+                        </switch></td>
+                    </tr>
+                    <tr><td>样品名称</td><td>{$data['sample_name']}</td></tr>
+                    <tr><td>样品类型</td><td>{$data['sample_type']}</td></tr>
+                    <tr><td>测序类型</td><td>{$data['seqtype']}</td></tr>
+                    <tr><td>测序平台</td><td>{$data['platform']}</td></tr>
+                    <tr><td>云存储路径</td><td>{$data['cloudpath']}</td></tr>
+                    <tr><td>本地存储路径</td><td>{$data['localpath']}</td></tr>
+                    <tr><td>创建时间</td><td>{:time_format($data['create_time'],"Y-m-d")}</td></tr>
+                    <tr><td>更新时间</td><td>{:time_format($data['update_time'],"Y-m-d")}</td></tr>
+                    <tr><td>操作人员</td><td>{:get_nickname($data['operator'])}</td></tr>
+                    <tr><td>备注</td><td>{$data['comment']}</td></tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <eq name="data['operator']" value="$uid">
+            <a class="btn btn-info" style="margin-top: 30px; margin-left: 180px;" href="__URL__/update/sid/{$data['id']}" role="button" target="_blank">修改数据信息</a>
+            <a class="btn btn-danger" style="margin-top: 30px; margin-left: 20px;" href="__URL__/del/sid/{$data['id']}" role="button" target="_blank">删除此数据</a> </eq>
+            <a class="btn btn-primary pull-right" style="margin-top: 30px;" href="__URL__/index" role="button">返回样本列表</a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function() {
+            $('#datatable').DataTable({paging: false,ordering:  false
+        });
+        } );
+    </script>
+    </body>
+</html>

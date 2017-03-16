@@ -1,0 +1,71 @@
+<include file="Public/header"/>
+        <div class="container">
+            <div class="row">
+            <div class="col-md-6">
+                <h1>文库总览</h1>
+            </div>
+
+            <div class="col-md-6">
+                <a class="btn btn-info pull-right" style="margin-top: 30px;" href="__URL__/add" role="button">添加文库</a>
+            </div>
+            <div class="col-md-12"><hr></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                        
+                        <thead>
+                            <tr><th class="text-center">文库编号</th><th class="text-center">样品编号</th><th class="text-center">试剂盒</th><th class="text-center">峰值(bp)</th><th class="text-center">浓度   ( Qbit 2.0 | qPCR )</th><th class="text-center">描述</th><th class="text-center">操作</th></tr>
+                        </thead>
+                        
+                        <tbody class="text-center" >
+                            <foreach name="library" item="obj">
+                            <tr>
+                                <td>{$obj['lib_id']}</td>
+                                <eq name="obj['sample_id']" value="none">
+                                <td>样本未收录在本数据库</td>
+                                <else/>
+                                <td><a href="{:get_sampleinfo($obj['sample_id'])}">{$obj['sample_id']}</a></td>
+                                </eq>
+                                <td>{$obj['kit']}</td>
+                                <td>{$obj['peak']}</td>
+                                <td>{$obj['conc_qubit']} (ng/uL) | {$obj['conc_qpcr']} (nM)</td>
+                                <td>{$obj['description']}</td>
+                                <td><a href="__URL__/detail/sid/{$obj.id}">详情</a> <eq name="obj['operator']" value="$uid">| <a href="__URL__/update/sid/{$obj.id}">修改</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a></eq></td>
+                            </tr>
+                            </foreach>
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <hr>
+
+            <footer>
+                <p>&copy; Company 2014</p>
+            </footer>
+        </div> <!-- /container -->
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+        <script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+                $('#datatable').DataTable({"order":[[0,"desc"]],
+            });
+            } );
+        </script>
+    </body>
+</html>

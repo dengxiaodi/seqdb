@@ -1,0 +1,65 @@
+<include file="Public/header"/>
+        <div class="container">
+            <div class="row">
+            <div class="col-md-6">
+                <h1>用户列表</h1>
+            </div>
+
+            <div class="col-md-6">
+                <a class="btn btn-info pull-right" style="margin-top: 30px;" href="__URL__/useradd" role="button">添加用户</a>
+            </div>
+            <div class="col-md-12"><hr></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                        
+                        <thead>
+                            <tr><th class="text-center">UID</th><th class="text-center">用户名称</th><th class="text-center">最后登录时间</th><th class="text-center">邮箱</th><th class="text-center">操作</th></tr>
+                        </thead>
+                        
+                        <tbody class="text-center" >
+                            <foreach name="_list" item="vo">
+                            <tr>
+                                <td>{$vo.id} </td>
+                                <td>{$vo.username}</td>
+                                <td><span>{$vo.last_login_time|time_format}</span></td>
+                                <td>{$vo.email}</td>
+                                <td><a href="__URL__/userdel/sid/{$obj.id}">删除</a></eq></td>
+                            </tr>
+                            </foreach>
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <hr>
+
+            <footer>
+                <p>&copy; Company 2014</p>
+            </footer>
+        </div> <!-- /container -->
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+        <script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+                $('#datatable').DataTable({"order":[[0,"desc"]],
+            });
+            } );
+        </script>
+    </body>
+</html>
