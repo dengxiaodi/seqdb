@@ -724,7 +724,7 @@ INSERT INTO `onethink_auth_rule` (`id`, `module`, `type`, `name`, `title`, `stat
 (352, 'seqdb', 1, 'Seqdb/Library/del', '删除文库', 1, ''),
 (353, 'seqdb', 1, 'Seqdb/Library/add', '添加文库', 1, ''),
 (354, 'seqdb', 1, 'Seqdb/Seq/add', '添加送样信息', 1, ''),
-(355, 'seqdb', 1, 'Seqdb/Data/add', '添加测序文件', 1, '');
+(355, 'seqdb', 1, 'Seqdb/Data/add', '添加测序文件', 1, ''),
 (356, 'seqdb', 1, 'Seqdb/Data/getcsv', '获取csv文件', 1, '');
 
 -- --------------------------------------------------------

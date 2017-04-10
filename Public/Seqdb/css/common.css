@@ -1,0 +1,27 @@
+h1 {
+	font-size: 28px;
+}
+
+.c-gray {
+	color: #9f9f9f;
+}
+
+label {
+	margin-bottom: 10px;
+}
+
+label small {
+	font-weight: 400;
+}
+
+.table-bordered > thead > tr > th {
+	border-bottom-width: 1px !important;
+}
+
+.header-actions {
+	margin-bottom: 30px;
+}
+
+.header-actions .btn {
+	margin-right: 15px;
+}

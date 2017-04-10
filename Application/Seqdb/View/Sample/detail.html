@@ -1,48 +1,47 @@
 <include file="Public/header"/>
 
     <div class="container">
+        <div class="row header-actions">
+            <div class="col-md-12">
+                <a class="btn btn-primary" href="__URL__/index" role="button">返回样本列表</a>
+                <eq name="sample['operator']" value="$uid">
+                    <a class="btn btn-info pull-right" href="__URL__/update/sid/{$sample['id']}" role="button" target="_blank">修改样本信息</a>
+                    <a class="btn btn-danger pull-right" href="__URL__/del/sid/{$sample['id']}" role="button" target="_blank">删除此样本</a> 
+                </eq>
+            </div>
+        </div>
         <div class="row">
-        <div class="col-md-12">
-            <a class="btn btn-primary btn-lg" style="margin-top: 30px;" href="__URL__/index" role="button">返回样本列表</a>
-        </div>
-        <div class="col-md-12">
-            <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
-                <thead>
-                    <tr><th class="text-center">项目</th><th class="text-center">描述</th></tr>
-                </thead>             
-                <tbody class="text-center" >
-                    <tr><td>样本编号</td><td>{$sample['sampleid']}</td>
-                    <tr><td>样本类型</td><td>{$sample['type']}</td>
-                    <tr><td>样本名称</td><td>{$sample['name']}</td>
-                    <tr><td>样本描述</td><td>{$sample['description']}</td>
-                    <tr><td>样本来源</td><td>{$sample['source']}</td>
-                    <tr><td>样本提取时间</td><td>{:time_format($sample['obtain_time'],"Y-m-d")}</td>
-                    <tr><td>样本剩余量</td><td>{$sample['remain']}</td>
-                    <tr><td>提取核酸类型</td><td>{$sample['nucleic_acid']}</td>
-                    <tr><td>提取方法</td><td>{$sample['method']}</td>
-                    <tr><td>样本浓度(Qubit2.0)</td><td>{$sample['concentration']}</td>
-                    <tr><td>样本溶液量</td><td>{$sample['amount']}</td>
-                    <tr><td>核酸质量</td><td>{$sample['mass']}</td>
-                    <tr><td>已使用体积</td><td>{$sample['used_volume']}</td>
-                    <tr><td>已使用质量</td><td>{$sample['used_mass']}</td>
-                    <tr><td>剩余质量</td><td>{$sample['rest']}</td>
-                    <tr><td>提取时间</td><td>{:time_format($sample['extraction_data'],"Y-m-d")}</td>
-                    <tr><td>操作人员</td><td>{:get_nickname($sample['operator'])}</td>
-                    <tr><td>创建时间</td><td>{:time_format($sample['create_time'],"Y-m-d")}</td>
-                    <tr><td>更新时间</td><td>{:time_format($sample['update_time'],"Y-m-d")}</td>
-                    <tr><td>备注</td><td>{$sample['comment']}</td>
-                </tbody>
-            </table>
-        </div>
-        
-        </div>
-        <div class="col-md-6"></div>
-        <div class="col-md-6">
-            <eq name="sample['operator']" value="$uid">
-            <a class="btn btn-info" style="margin-top: 30px; margin-left: 180px;" href="__URL__/update/sid/{$sample['id']}" role="button" target="_blank">修改样本信息</a>
-            <a class="btn btn-danger" style="margin-top: 30px; margin-left: 20px;" href="__URL__/del/sid/{$sample['id']}" role="button" target="_blank">删除此样本</a> </eq>
-            <a class="btn btn-primary pull-right" style="margin-top: 30px;" href="__URL__/index" role="button">返回样本列表</a>
-
+            <div class="col-md-12">
+                <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th width="30%">项目</th>
+                            <th>描述</th>
+                        </tr>
+                    </thead>             
+                    <tbody>
+                        <tr><td>样本名称</td><td>{$sample['name']}</td>
+                        <tr><td>样本类型</td><td>{$sample['type']}</td>
+                        <tr><td>样本描述</td><td>{$sample['description']}</td>
+                        <tr><td>样本来源</td><td>{$sample['source']}</td>
+                        <tr><td>样本提取时间</td><td>{:time_format($sample['obtain_time'],"Y-m-d")}</td>
+                        <tr><td>样本剩余量</td><td>{$sample['remain']}</td>
+                        <tr><td>提取核酸类型</td><td>{$sample['nucleic_acid']}</td>
+                        <tr><td>提取方法</td><td>{$sample['method']}</td>
+                        <tr><td>样本浓度(Qubit2.0)</td><td>{$sample['concentration']}</td>
+                        <tr><td>样本溶液量</td><td>{$sample['amount']}</td>
+                        <tr><td>核酸质量</td><td>{$sample['mass']}</td>
+                        <tr><td>已使用体积</td><td>{$sample['used_volume']}</td>
+                        <tr><td>已使用质量</td><td>{$sample['used_mass']}</td>
+                        <tr><td>剩余质量</td><td>{$sample['rest']}</td>
+                        <tr><td>提取时间</td><td>{:time_format($sample['extraction_data'],"Y-m-d")}</td>
+                        <tr><td>操作人员</td><td>{:get_nickname($sample['operator'])}</td>
+                        <tr><td>创建时间</td><td>{:time_format($sample['create_time'],"Y-m-d")}</td>
+                        <tr><td>更新时间</td><td>{:time_format($sample['update_time'],"Y-m-d")}</td>
+                        <tr><td>备注</td><td>{$sample['comment']}</td>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

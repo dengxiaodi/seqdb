@@ -10,6 +10,4 @@ class SampleModel extends Model{
    protected $_auto = array ( 
      array('update_time','time',2,'function'), 
      );
-
-   
 }

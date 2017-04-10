@@ -1,0 +1,220 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+
+            <form  method="post" action="__URL__/add">
+                <!-- <fieldset id="InputsWrapper"> -->
+                   <!--  <legend><strong>样品信息</strong></legend>
+                    <a class="btn btn-info pull-right" style="margin-right: 30px;" href="#" role="button" id="AddMoreFileBox">添加一个样品</a> -->
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <legend>添加一个新的样本</legend>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>样品名称：<small class="c-gray">请按照物种-组织-描述信息为格式填写，例如：Human-Liver-JohnCancerRelapseDay7</small></label>
+                                        <input type="text" class="form-control" name="name" placeholder="样品名称" value="{$sample['name']}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                               <!--  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label> 样品编号: </label>
+                                        <input type="text" class="form-control" name="sampleid" placeholder="1" value="1">
+                                    </div>
+                                </div> -->
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>样品类型: <small class="c-gray">按照物种组织的格式填写，例如：人类肝脏</small></label>
+                                        <input type="text" class="form-control" name="type" placeholder="(物种-组织)" value="{$sample['type']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>样品来源: </label>
+                                        <input type="text" class="form-control" name="source" placeholder="样品来源" value="{$sample['source']}">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>样品描述: </label>
+                                        <input type="text" class="form-control" name="description" placeholder="样品描述" value="{$sample['description']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>提取时间：</label>
+                                        <input size="19" type="text" readonly class="form-control timeer" name="obtain_time" placeholder="提取时间" value="{$sample['obtain_time']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>剩余样品量: </label>
+                                        <input type="text" class="form-control" name="remain" placeholder="剩余样品量" value="{$sample['remain']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>核酸类型: </label>
+                                        <input type="text" class="form-control" name="nucleic_acid" placeholder="DNA / RNA" value="{$sample['nucleic_acid']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>提取方法: </label>
+                                        <input type="text" class="form-control" name="method" placeholder="提取方法" value="{$sample['method']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>核酸浓度：</label>
+                                        <input type="text" class="form-control" name="concentration" placeholder="(ng/ul) by Qubit 2.0" value="{$sample['concentration']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>核酸总体积: </label>
+                                        <input type="text" class="form-control" name="amount" placeholder="Amount Volume(uL)" value="{$sample['amount']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>核酸质量: </label>
+                                        <input type="text" class="form-control" name="mass" placeholder="mass(ug)" value="{$sample['mass']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>使用体积：</label>
+                                        <input type="text" class="form-control" name="used_volume" placeholder="used Volume(uL)" value="{$sample['used_volume']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>使用质量：</label>
+                                        <input type="text" class="form-control" name="used_mass" placeholder="used(ug)" value="{$sample['used_mass']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>剩余质量: </label>
+                                        <input type="text" class="form-control" name="rest" placeholder="rest DNA/RNA (ug)" value="{$sample['rest']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>核酸提取时间: </label>
+                                        <input size="32" type="text" readonly class="form-control timeer" name="extraction_data" placeholder="extraction date test time（gel/2100)" value="{$sample['extraction_data']}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label> 备 注:  </label>
+                                        <textarea type="text" class="form-control" name="comment" placeholder="样品备注信息" value="{$sample['comment']}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                           <!--  <div class="row">
+                                <a class="btn btn-danger btn-xs pull-right removeclass" style="margin-right: 30px;" href="#" role="button">删除</a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                <!-- </fieldset> -->
+
+
+                <!-- <fieldset> -->
+                    <div class="row">
+                         <div class="col-md-4">
+                             <button type="submit" class="btn btn-primary">提交样本</button>
+                         </div>
+                    </div>
+                    
+                <!-- </fieldset> -->
+
+            </form>
+        </div>
+        
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <hr>
+
+        <footer>
+        <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+
+    <script>  
+
+    // $(document).ready(function() {  
+      
+    // var MaxInputs       = 100; //maximum input boxes allowed  
+    // var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID  
+    // var AddButton       = $("#AddMoreFileBox"); //Add button ID  
+      
+    // var x = InputsWrapper.length; //initlal text box count  
+    // var FieldCount=1; //to keep track of text box added  
+      
+    // $(AddButton).click(function (e)  //on add input button click  
+    // {  
+    //         if(x <= MaxInputs) //max input box allowed  
+    //         {  
+    //             FieldCount++; //text box added increment  
+    //             //add input box  
+
+    //             $(InputsWrapper).append('<div class="row"><div class="col-md-12"><div class="bs-callout bs-callout-info"><legend>样品序号 '+ FieldCount +'</legend><div class="row"><div class="col-md-4"><div class="form-group form-inline"><label> 样品编号: </label><input type="text" class="form-control" name="sampleid[]" placeholder="'+ FieldCount +'" value="'+ FieldCount +'"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>样品类型: </label><input type="text" class="form-control" name="type[]" placeholder="( cell / tissue )"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>样品来源: </label><input type="text" class="form-control" name="source[]" placeholder="样品来源"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>样品名称: </label><input type="text" class="form-control" name="name[]" placeholder="样品名称"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>样品描述: </label><input type="text" class="form-control" name="description[]" placeholder="样品描述"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>提取时间：</label><input size="19" type="text" readonly class="form-control timeer" name="obtain_time[]" placeholder="提取时间"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>剩余样品量: </label><input type="text" class="form-control" name="remain[]" placeholder="剩余样品量"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>核酸类型: </label><input type="text" class="form-control" name="nucleic_acid[]" placeholder="DNA / RNA"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>提取方法: </label><input type="text" class="form-control" name="method[]" placeholder="提取方法"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>核酸浓度：</label><input type="text" class="form-control" name="concentration[]" placeholder="(ng/ul) by Qubit 2.0"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>核酸总体积: </label><input type="text" class="form-control" name="amount[]" placeholder="Amount Volume(uL)"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>核酸质量: </label><input type="text" class="form-control" name="mass[]" placeholder="mass(ug)"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>使用体积：</label><input type="text" class="form-control" name="used_volume[]" placeholder="used Volume(uL)"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>使用质量：</label><input type="text" class="form-control" name="used_mass[]" placeholder="used(ug)"></div></div><div class="col-md-4"><div class="form-group form-inline"><label>剩余质量: </label><input type="text" class="form-control" name="rest[]" placeholder="rest DNA/RNA (ug)"></div></div><div class="col-md-6"><div class="form-group form-inline"><label>核酸提取时间: </label><input size="32" type="text" readonly class="form-control timeer" name="extraction_data[]" placeholder="extraction date test time（gel/2100)"></div></div><div class="col-md-6"><div class="form-group form-inline"><label> 备 注:  </label><input size="50" type="text" class="form-control" name="comment[]" placeholder="样品备注信息"></div></div></div><div class="row"><a class="btn btn-danger btn-xs pull-right removeclass" style="margin-right: 30px;" href="#" role="button">删除</a></div></div></div></div>');   
+    //             $(".timeer").datetimepicker(
+    //                 {format: 'yyyy-mm-dd', 
+    //                 startView:2, 
+    //                 todayBtn: true, 
+    //                 autoclose: true,
+    //                 minView: 2, 
+    //                 clearBtn:true}
+    //                 ); 
+    //             x++; //text box increment  
+    //         }  
+    // return false;  
+    // });  
+      
+    // $("body").on("click",".removeclass", function(e){ //user click on remove text  
+    //         if( x > 1 ) {  
+    //                 $(this).parent('div').parent('div').remove(); //remove text box  
+    //                 x--; //decrement textbox  
+    //         }  
+    // return false;  
+    // })   
+      
+    // });  
+    </script>
+    <script type="text/javascript">
+        $(".timeer").datetimepicker(
+            {format: 'yyyy-mm-dd', 
+            startView:2, 
+            todayBtn: true, 
+            autoclose: true,
+            minView: 2, 
+            clearBtn:true}
+            );
+    </script>
+    </body>
+</html>

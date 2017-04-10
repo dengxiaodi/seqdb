@@ -15,22 +15,27 @@
                 <div class="col-md-12">
 
                     <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
-                        
                         <thead>
-                            <tr><th class="text-center">样品编号</th><th class="text-center">样品类型</th><th class="text-center">样品名称</th><th class="text-center">样品来源</th><th class="text-center">样品描述</th><th class="text-center">核酸类型</th><th class="text-center">操作人员</th><th class="text-center">操作</th></tr>
+                            <th>样品</th>
+                            <th>类型</th>
+                            <th>来源</th>
+                            <th>描述</th>
+                            <th>核酸类型</th>
+                            <th>操作人员</th>
+
+                            <th>操作</th></tr>
                         </thead>
                         
-                        <tbody class="text-center" >
+                        <tbody>
                             <foreach name="sample" item="obj">
                             <tr>
-                                <td>{$obj['sampleid']}</td>
+                                <td><a href="__URL__/detail/sid/{$obj.id}"> {$obj['name']}</a></td>
                                 <td>{$obj['type']}</td>
-                                <td>{$obj['name']}</td>
                                 <td>{$obj['source']}</td>
                                 <td>{$obj['description']}</td>
                                 <td>{$obj['nucleic_acid']}</td>
                                 <td>{:get_nickname($obj['operator'])}</td>
-                                <td><a href="__URL__/detail/sid/{$obj.id}">详情</a> <eq name="obj['operator']" value="$uid"> | <a href="__URL__/update/sid/{$obj.id}">修改</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a></eq></td>
+                                <td><a href="__URL__/update/sid/{$obj.id}">修改</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a></eq></td>
                             </tr>
                             </foreach>
                         </tbody>

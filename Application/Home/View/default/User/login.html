@@ -24,19 +24,19 @@
               <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
             </div>
           </div>
-          <div class="control-group">
+         <!--  <div class="control-group">
             <label class="control-label" for="inputPassword">验证码</label>
             <div class="controls">
               <input type="text" id="inputPassword" class="span3" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
             </div>
-          </div>
-          <div class="control-group">
+          </div> -->
+         <!--  <div class="control-group">
             <label class="control-label"></label>
             <div class="controls">
                 <img class="verifyimg reloadverify" alt="点击切换" src="{:U('verify')}" style="cursor:pointer;">
             </div>
             <div class="controls Validform_checktip text-warning"></div>
-          </div>
+          </div> -->
           <div class="control-group">
             <div class="controls">
               <label class="checkbox">
@@ -71,23 +71,24 @@
     		function success(data){
     			if(data.status){
     				window.location.href = data.url;
-    			} else {
-    				self.find(".Validform_checktip").text(data.info);
-    				//刷新验证码
-    				$(".reloadverify").click();
     			}
+       //     else {
+    			// 	self.find(".Validform_checktip").text(data.info);
+    			// 	//刷新验证码
+    			// 	$(".reloadverify").click();
+    			// }
     		}
     	});
 
-		$(function(){
-			var verifyimg = $(".verifyimg").attr("src");
-            $(".reloadverify").click(function(){
-                if( verifyimg.indexOf('?')>0){
-                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
-                }else{
-                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
-                }
-            });
-		});
+		// $(function(){
+		// 	var verifyimg = $(".verifyimg").attr("src");
+  //           $(".reloadverify").click(function(){
+  //               if( verifyimg.indexOf('?')>0){
+  //                   $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+  //               }else{
+  //                   $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+  //               }
+  //           });
+		// });
 	</script>
 </block>
