@@ -6,6 +6,18 @@ h1 {
 	color: #9f9f9f;
 }
 
+.c-red {
+	color: #c9302c;
+}
+
+.c-green {
+	color: #449d44;
+}
+
+.c-orange {
+	color: #ec971f;
+}
+
 label {
 	margin-bottom: 10px;
 }
@@ -18,10 +30,32 @@ label small {
 	border-bottom-width: 1px !important;
 }
 
-.header-actions {
-	margin-bottom: 30px;
+.page-header {
+	padding-bottom: 20px;
 }
 
-.header-actions .btn {
+.page-header h1 {
+	margin: 0;
+	display: inline-block;
+	line-height: 34px;
+}
+
+.page-header .header-actions {
+	float: right;
+	display: inline-block;
+}
+
+.page-header .header-actions .btn {
 	margin-right: 15px;
+}
+
+.page-header .header-actions .btn:last-child {
+	margin-right: 0;
+}
+
+.page-footer {
+	margin-top: 30px;
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid #eee;
 }

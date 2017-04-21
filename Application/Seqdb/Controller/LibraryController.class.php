@@ -7,65 +7,72 @@ class LibraryController extends AdminController {
 
     public function index(){
         $library = M('library');
-        $data = $library->order('id desc')->select();
+        $sample = M('sample');
+        $library_list = $library->order('id desc')->select();
+        foreach ($library_list as $key => $value) {
+            $library_list[$key]['sample_info'] = $sample->where('id=' . intval($value['sample_id']))->find();
+        }
+
         $uid = is_login();
         $this->assign('uid',$uid);
-        $this->assign('library',$data);
+        $this->assign('library',$library_list);
         $this->display();
+    }
+
+    public function processLibraryData() {
+        return array(
+            'id' => $_POST['id'],
+            'sample_id' => $_POST['sample_id'],
+            'title' => $_POST['title'],
+            'kit' => $_POST['kit'],
+            'cycle_num' => $_POST['cycle_num'],
+            'template_mass' => $_POST['template_mass'],
+            'lib_volume' => $_POST['lib_volume'],
+            'conc_qubit' => $_POST['conc_qubit'],
+            'conc_qpcr' => $_POST['conc_qpcr'],
+            'peak' => $_POST['peak'],
+            'create_date' => strtotime($_POST['create_date']),
+            'operator' => is_login(),
+            'create_time' => time(),
+            'update_time' => 0,
+            'comment' => $_POST['comment']
+        );
+    }
+
+    public function add_library() {
+        $uid = is_login();
+
+        if(!$_POST['sample_id']) {
+            $this->error("添加样本失败：样本编号不能为空");
+        }
+        
+        // test sample info
+
+        $sample_info = M('sample')->where('id=' . intval($_POST['sample_id']))->find();
+        if(!$sample_info) {
+            $this->error("添加样本失败：无效的样本信息");
+        }
+
+        $library_data = $this->processLibraryData();
+
+        $library = M('library');
+        $library->add($library_data);
+        action_log('create_library','library',$uid,$uid);
+        $this->redirect('library/index');
     }
 
     public function add(){
         $uid = is_login();
-        if($_POST){
-         
-            $lib_id = $_POST['lib_id'];
-            $sample_id = $_POST['sample_id'];
-            $description = $_POST['description'];
-            $kit = $_POST['kit'];
-            $cycle_num = $_POST['cycle_num'];
-            $template_mass = $_POST['template_mass'];
-            $lib_volume = $_POST['lib_volume'];
-            $conc_qubit = $_POST['conc_qubit'];
-            $conc_qpcr = $_POST['conc_qpcr'];
-            $peak = $_POST['peak'];
-            $create_date = $_POST['create_date'];
-            $comment = $_POST['comment'];
-
-            foreach ($lib_id as $key => $lib_id) {
-                    $data[]=array(
-                                    'lib_id' => time_format(time(),"Ymd").sprintf("%03d", is_login()).sprintf("%04d",$lib_id),
-                                    'sample_id' => $sample_id[$key],
-                                    'description' => $description[$key],
-                                    'kit' => $kit[$key],
-                                    'cycle_num' => $cycle_num[$key],
-                                    'template_mass' => $template_mass[$key],
-                                    'lib_volume' => $lib_volume[$key],
-                                    'conc_qubit' => $conc_qubit[$key],
-                                    'conc_qpcr' => $conc_qpcr[$key],
-                                    'peak' => $peak[$key],
-                                    'create_date' => strtotime($create_date[$key]),
-                                    'operator' => is_login(),
-                                    'create_time' => time(),
-                                    'update_time' => 0,
-                                    'comment' => $comment[$key]
-                                    );
-                }
-
-            $library = M('library');
-            $library->addAll($data);
-
-            action_log('create_library','library',$uid,$uid);
-            $this->success('成功添加文库',U('library/index'));
-
-
-        }else{
-            $condition['operator'] = $uid;
-            $sampleinfo = M('sample')->order('id desc')->getField('sampleid,type,name,source,nucleic_acid',true);
-            $this->assign('sampleinfo',$sampleinfo);
-            $this->display(add);
+        $sample_id = $_GET['sample_id'];
+        $sample_info = M('sample')->where('id=' . intval($sample_id))->find();
+        if(!$sample_info) {
+            $this->error("创建文库失败：无效的样本编号");
         }
+        $this->assign('sample_info', $sample_info);
 
-        
+        $condition['operator'] = $uid;
+        $this->assign('edit_action', 'add_library');
+        $this->display(edit);
     }
 
     public function del(){
@@ -73,54 +80,55 @@ class LibraryController extends AdminController {
         $library = M('library');
         $condition['id'] = I('sid');
         $library->where($condition)->delete();
-        $this->success('删除成功');
+        $this->redirect('Library/index');
         action_log('delete_library','library',$uid,$uid);
+    }
+
+    public function update_library() {
+        $library = M('library');
+
+        $sample_id = $_POST['sample_id'];
+        $sample_info = M('sample')->where('id=' . intval($sample_id))->find();
+        if(!$sample_info) {
+            $this->error("更新文库失败：无效的样本信息");
+        }
+
+        $library_data = $this->processLibraryData();
+        $library->save($library_data);
+        action_log('update_library','library',$uid,$uid);
+        $this->redirect('Library/index');
     }
 
     public function update(){
         $uid = is_login();
+
+        $library = M('library');
+
         $condition['id'] = I('sid');
-        if($_POST){
+        $library_info = $library->where()->find();
 
-            $data['id'] = $_POST['id'];
-            $data['lib_id'] = $_POST['lib_id'];
-            $data['sample_id'] = $_POST['sample_id'];
-            $data['description'] = $_POST['description'];
-            $data['kit'] = $_POST['kit'];
-            $data['cycle_num'] = $_POST['cycle_num'];
-            $data['template_mass'] = $_POST['template_mass'];
-            $data['lib_volume'] = $_POST['lib_volume'];
-            $data['conc_qubit'] = $_POST['conc_qubit'];
-            $data['conc_qpcr'] = $_POST['conc_qpcr'];
-            $data['peak'] = $_POST['peak'];
-            $data['create_date'] = strtotime($_POST['create_date']);
-            $data['update_time'] = time();
-            $data['comment'] = $_POST['comment'];
-
-            $library = M('library');
-            $library->save($data);
-            action_log('update_library','library',$uid,$uid);
-            $this->success('修改成功',U('library/index'));
-
-        }else{
-            $library = M('library');
-            $result = $library->where($condition)->select();
-            $samplecon['operator']=$uid;
-            $sample = M('sample')->where($samplecon)->order('id desc')->getField('sampleid,type,name,source,nucleic_acid',true);
-            $this->assign('sampleid',$sample);
-            $this->assign('library',$result[0]);
-            $this->display(update);
-
+        $sample = M('sample');
+        $sample_info = M('sample')->where('id=' . intval($library_info['sample_id']))->find();
+        if(!$sample_info) {
+            $this->error("更新文库失败：无效的样本信息");
         }
+        $this->assign('sample_info', $sample_info);
+
+        $this->assign('library_info', $library_info);
+        $this->assign('edit_action', 'update_library');
+        $this->display(edit);
     }
 
     public function detail(){
         $library = M('library');
+        $sample = M('sample');
+
         $condition['id'] = I('sid');
-        $result = $library->where($condition)->select();
+        $library_info = $library->where($condition)->find();
+        $library_info['sample_info'] = $sample->where('id=' . intval($library_info['sample_id']))->find(); 
         $uid = is_login();
         $this->assign('uid',$uid);
-        $this->assign('library',$result[0]);
+        $this->assign('library',$library_info);
         $this->display(detail);
     }
 

@@ -1,14 +1,13 @@
 <include file="Public/header"/>
         <div class="container">
-            <div class="row">
-            <div class="col-md-6">
-                <h1>样本总览</h1>
-            </div>
-
-            <div class="col-md-6">
-                <a class="btn btn-info pull-right" style="margin-top: 30px;" href="__URL__/add" role="button">添加样本</a>
-            </div>
-            <div class="col-md-12"><hr></div>
+            <div class="row page-header">
+                <div class="col-md-12">
+                    <h1>样本列表</h1>
+                    
+                    <div class="header-actions">
+                        <a class="btn btn-primary" href="__URL__/add" role="button">创建样本</a>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
@@ -22,21 +21,20 @@
                             <th>描述</th>
                             <th>核酸类型</th>
                             <th>操作人员</th>
-
                             <th>操作</th></tr>
                         </thead>
                         
                         <tbody>
                             <foreach name="sample" item="obj">
-                            <tr>
-                                <td><a href="__URL__/detail/sid/{$obj.id}"> {$obj['name']}</a></td>
-                                <td>{$obj['type']}</td>
-                                <td>{$obj['source']}</td>
-                                <td>{$obj['description']}</td>
-                                <td>{$obj['nucleic_acid']}</td>
-                                <td>{:get_nickname($obj['operator'])}</td>
-                                <td><a href="__URL__/update/sid/{$obj.id}">修改</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a></eq></td>
-                            </tr>
+                                <tr>
+                                    <td><a href="__URL__/detail/sid/{$obj.id}"> {$obj['name']}</a></td>
+                                    <td>{$obj['type']}</td>
+                                    <td>{$obj['source']}</td>
+                                    <td>{$obj['description']}</td>
+                                    <td>{$obj['nucleic_acid']}</td>
+                                    <td>{:get_nickname($obj['operator'])}</td>
+                                    <td><a href="__URL__/update/sid/{$obj.id}">修改</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a> | <a href="{:U('Library/add?sample_id=' . intval($obj['id']))}">创建文库</a></eq></td>
+                                </tr>
                             </foreach>
                         </tbody>
 
@@ -45,17 +43,8 @@
                 </div>
             </div>
         </div>
-
-
-
-        <div class="container">
-            <hr>
-
-            <footer>
-                <p>&copy; Company 2014</p>
-            </footer>
-        </div> <!-- /container -->
-
+        
+        <include file="Public/pageFooter" />
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
