@@ -4,7 +4,9 @@
                 <div class="col-md-12">
                     <h1>文库列表</h1>
                     <div class="header-actions">
-                        <a class="btn btn-primary" href="{:U('Sample/index')}" role="button">从样本创建文库</a>
+                        <span class="sel-lib hidden">当前共选择了<b id="sel-lib-count">3</b>个文库</span>
+                        <a id="send-lib" data-selected-ids="" class="btn btn-warning disabled" data-toggle="tooltip" title="请先选择需要送测的文库" href="{:U('Seq/add')}" role="button"><span class="glyphicon glyphicon-send"></span> 选择文库送测</a>
+                        <a class="btn btn-primary" href="{:U('Sample/index')}" role="button"><span class="glyphicon glyphicon-plus"></span> 从样本创建文库</a>
                     </div>
                 </div>
             </div>
@@ -15,18 +17,19 @@
                         <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
                             <thead>
                                 <tr>
+                                    <th class="text-center">送测</th>
                                     <th>文库名称</th>
                                     <th>建库样本</th>
                                     <th>建库时间</th>
                                     <th>建库人员</th>
                                     <th>测序状态</th>
-                                    <th class="text-center">送测</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <foreach name="library" item="obj">
                                     <tr>
+                                        <td class="text-center"><input class="check-lib" type="checkbox" data-lib-id="{$obj['id']}"></td>
                                         <td>
                                             <a href="{:U('library/detail', 'sid=' . intval($obj['id']))}">{$obj['title']}</a>
                                         </td>
@@ -36,11 +39,10 @@
                                         <td>{:time_format($obj['create_date'],"Y-m-d")}</td>
                                         <td>{:get_nickname($obj['operator'])}</td>
                                         <td>
-                                            <if condition="$ojb['seqed']"> <span class="c-green">已送测</span>
+                                            <if condition="$obj['seqed']"> <span class="c-green">已送测 ({$obj['seqed']})</span>
                                                 <else /> <span class="c-red">未送测</span>
                                             </if>
                                         </td>
-                                        <td class="text-center"><input type="checkbox"></td>
                                         <td><eq name="obj['operator']" value="$uid"><a href="__URL__/update/sid/{$obj.id}">编辑</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a></eq>
                                         </td>
                                     </tr>
@@ -54,17 +56,55 @@
 
         <include file="Public/pageFooter" />
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
         <script type="text/javascript" language="javascript" class="init">
             $(document).ready(function() {
-                $('#datatable').DataTable({"order":[[0,"desc"]],
+                $('#datatable').DataTable({
+                    "order":[[0,"desc"]]
+                });
+
+                // 选择文库
+
+                $('body').on('click', '.check-lib', function() {
+                    var $sendButton = $('#send-lib');
+                    var checkIds = $sendButton.attr('data-selected-ids');
+
+                    $this = $(this);
+                    var ids = [];
+                    if(checkIds.trim().length) {
+                        var ids = checkIds.split(',');
+                    }
+                    
+                    var id = $this.attr('data-lib-id');
+                    var index = $.inArray(id, ids);
+                    if($this.is(':checked')) {
+                        if(index == -1) {
+                            ids[ids.length] = id;
+                        }
+                    } else {
+                        if( index != -1) {
+                            ids.splice(index, 1);
+                        }
+                    }
+
+                    $sendButton.attr('data-selected-ids', ids.join(','));
+                    var checkedCount = ids.length;
+                    $('#sel-lib-count').text(checkedCount);
+                    $('.sel-lib').toggleClass('hidden', (checkedCount <= 0));
+                    $('#send-lib').toggleClass('disabled', (checkedCount <= 0));
+                });
+
+                // 送出测序
+
+                $('#send-lib').on('click', function(e) {
+                    e.preventDefault();
+                    $this = $(this);
+
+                    var url = $this.attr('href') + '&lib_ids=' + $this.attr('data-selected-ids');
+                    window.location.href = url;
+                })
             });
-            } );
         </script>
     </body>
 </html>

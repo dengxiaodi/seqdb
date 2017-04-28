@@ -20,99 +20,96 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="row">
+                            <!-- <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> 文库编号: </label>
+                                    <input type="text" class="form-control" name="lib_id" value="{$library_info['lib_id']}">
+                                </div>
+                            </div> -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> 文库名称: <small class="c-gray">此名称将用来区分和标记文库</small></label>
+                                    <input type="text" class="form-control" name="title" value="{$library_info['title']}" placeholder="文库名称">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> 建库试剂: </label>
+                                    <input type="text" class="form-control" name="kit" value="{$library_info['kit']}" placeholder="建库试剂">
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>样品编号: </label>
+                                    <select class="selectpicker" name="sample_id" data-hide-disabled="true" data-live-search="true" title="请选择样本来源">
+                                        <option value="none">样本不在本数据库</option>
+                                        <foreach name="sampleid" item="sample" >
+                                            <eq name="sample['sampleid']" value="$library_info['sample_id']">
+                                                <option value="{$sample['sampleid']}" selected>Sample ID:{$sample['sampleid']} Type:{$sample['type']} Name:{$sample['name']} Source:{$sample['source']} Nucleic_acid:{$sample['nucleic_acid']}</option> 
+                                            <else/>
+                                                <option value="{$sample['sampleid']}">Sample ID:{$sample['sampleid']} Type:{$sample['type']} Name:{$sample['name']} Source:{$sample['source']} Nucleic_acid:{$sample['nucleic_acid']}</option>
+                                            </eq>
+                                            
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div> -->
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>建库时间: </label>
+                                    <input  type="text" readonly class="form-control timeer" name="create_date" value="{:time_format($library_info['create_date'],"Y-m-d")}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>PCR循环次数: </label>
+                                    <input type="text" class="form-control" name="cycle_num" value="{$library_info['cycle_num']}" placeholder="PCR循环次数">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>模板质量: </label>
+                                    <input type="text" class="form-control" name="template_mass" value="{$library_info['template_mass']}" placeholder="模板质量(ug)">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>文库体积: </label>
+                                    <input type="text" class="form-control" name="lib_volume" value="{$library_info['lib_volume']}" placeholder="文库体积(ul)">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Qubit浓度: </label>
+                                    <input type="text" class="form-control" name="conc_qubit" value="{$library_info['conc_qubit']}" placeholder="Qubit浓度(ng/ul)">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>qPCR浓度: </label>
+                                    <input type="text" class="form-control" name="conc_qpcr" value="{$library_info['conc_qpcr']}" placeholder="qPCR浓度(nM)">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>2100峰值: </label>
+                                    <input type="text" class="form-control" name="peak" value="{$library_info['peak']}" placeholder="2100峰值(bp)">
+                                </div>
+                            </div>
+
                             <div class="col-md-12">
-                                <div class="row">
-                                    <!-- <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label> 文库编号: </label>
-                                            <input type="text" class="form-control" name="lib_id" value="{$library_info['lib_id']}">
-                                        </div>
-                                    </div> -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label> 文库名称: <small class="c-gray">此名称将用来区分和标记文库</small></label>
-                                            <input type="text" class="form-control" name="title" value="{$library_info['title']}" placeholder="文库名称">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label> 建库试剂: </label>
-                                            <input type="text" class="form-control" name="kit" value="{$library_info['kit']}" placeholder="建库试剂">
-                                        </div>
-                                    </div>
-                                    <!-- <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>样品编号: </label>
-                                            <select class="selectpicker" name="sample_id" data-hide-disabled="true" data-live-search="true" title="请选择样本来源">
-                                                <option value="none">样本不在本数据库</option>
-                                                <foreach name="sampleid" item="sample" >
-                                                    <eq name="sample['sampleid']" value="$library_info['sample_id']">
-                                                        <option value="{$sample['sampleid']}" selected>Sample ID:{$sample['sampleid']} Type:{$sample['type']} Name:{$sample['name']} Source:{$sample['source']} Nucleic_acid:{$sample['nucleic_acid']}</option> 
-                                                    <else/>
-                                                        <option value="{$sample['sampleid']}">Sample ID:{$sample['sampleid']} Type:{$sample['type']} Name:{$sample['name']} Source:{$sample['source']} Nucleic_acid:{$sample['nucleic_acid']}</option>
-                                                    </eq>
-                                                    
-                                                </foreach>
-                                            </select>
-                                        </div>
-                                    </div> -->
-                                    
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>建库时间: </label>
-                                            <input  type="text" readonly class="form-control timeer" name="create_date" value="{:time_format($library_info['create_date'],"Y-m-d")}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>PCR循环次数: </label>
-                                            <input type="text" class="form-control" name="cycle_num" value="{$library_info['cycle_num']}" placeholder="PCR循环次数">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>模板质量: </label>
-                                            <input type="text" class="form-control" name="template_mass" value="{$library_info['template_mass']}" placeholder="模板质量(ug)">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>文库体积: </label>
-                                            <input type="text" class="form-control" name="lib_volume" value="{$library_info['lib_volume']}" placeholder="文库体积(ul)">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Qubit浓度: </label>
-                                            <input type="text" class="form-control" name="conc_qubit" value="{$library_info['conc_qubit']}" placeholder="Qubit浓度(ng/ul)">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>qPCR浓度: </label>
-                                            <input type="text" class="form-control" name="conc_qpcr" value="{$library_info['conc_qpcr']}" placeholder="qPCR浓度(nM)">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>2100峰值: </label>
-                                            <input type="text" class="form-control" name="peak" value="{$library_info['peak']}" placeholder="2100峰值(bp)">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>备注: </label>
-                                            <textarea class="form-control" name="comment"  placeholder="备注">{$library_info['comment']}</textarea>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label>备注: </label>
+                                    <textarea class="form-control" name="comment"  placeholder="备注">{$library_info['comment']}</textarea>
                                 </div>
                             </div>
                         </div>

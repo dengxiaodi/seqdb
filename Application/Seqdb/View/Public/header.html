@@ -21,7 +21,7 @@
     <link href="__CSS__/bootstrap-select.min.css" rel="stylesheet">
 
     <link href="__CSS__/select.bootstrap.1.2.0.min.css" rel="stylesheet" type="text/css" >
-    <link href="__CSS__/common.css" rel="stylesheet" type="text/css" >
+    <link href="__CSS__/seqdb.css" rel="stylesheet" type="text/css" >
 
 
 
@@ -57,8 +57,8 @@
             <ul class="nav navbar-nav">
                 <li <eq name="CONTROLLER_NAME" value="Sample">class="active"</eq>><a href="{:U('Sample/index')}">样本管理</a></li>
                 <li <eq name="CONTROLLER_NAME" value="Library">class="active"</eq>><a href="{:U('Library/index')}">文库管理</a></li>
-                <li <eq name="CONTROLLER_NAME" value="Seq">class="active"</eq>><a href="{:U('Seq/index')}">送样管理</a></li>
-                <li <eq name="CONTROLLER_NAME" value="Data">class="active"</eq>><a href="{:U('Data/index')}">数据管理</a></li>
+                <li <eq name="CONTROLLER_NAME" value="Seq">class="active"</eq>><a href="{:U('Seq/index')}">测序管理</a></li>
+                <li <eq name="CONTROLLER_NAME" value="Data">class="active"</eq>><a href="{:U('Data/index')}">数据下载</a></li>
                 <if condition="is_administrator()">
                   <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理<span class="caret"></span></a>

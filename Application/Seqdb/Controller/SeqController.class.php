@@ -14,54 +14,110 @@ class SeqController extends AdminController {
         $this->display();
     }
 
-    public function add(){
+    public function add_seq() {
         $uid = is_login();
-        if($_POST){
-            $seqdata['seq_id'] = time_format(time(),"Ymd").sprintf("%03d", is_login()).sprintf("%04d",$_POST['seq_id']);
-            $seqdata['company'] = $_POST['company'];
-            $seqdata['send_date'] = strtotime($_POST['send_date']);
-            $seqdata['create_time'] = time();
-            $seqdata['update_time'] = time();
-            $seqdata['operator'] = is_login();
-            $seqdata['comment'] = $_POST['seq_comment'];
+        $seqdata = $this->processSeqData();
 
-            $platform = $_POST['platform'];
-            $seqtype = $_POST['seqtype'];
-            $lib_volume = $_POST['lib_volume'];
-            $conc_qubit = $_POST['conc_qubit'];
-            $conc_qpcr = $_POST['conc_qpcr'];
-            $peak = $_POST['peak'];
-            $comment = $_POST['comment'];
-
-
-            $lib_id = $_POST['lib_id'];
-            foreach ($lib_id as $key => $libid) {
-                $seqlibdata[] = array(  'seq_id' => $seqdata['seq_id'], 
-                                        'lib_id' => $libid,
-                                        'platform' => $platform[$key],
-                                        'seqtype' => $seqtype[$key],
-                                        'lib_volume' => $lib_volume[$key],
-                                        'conc_qubit' => $conc_qubit[$key],
-                                        'conc_qpcr' => $conc_qpcr[$key],
-                                        'peak' => $peak[$key],
-                                        'comment' => $comment[$key]
-                                        );
-            }
-
-            $seq = M('seq');
-            $seq->create($seqdata);
-            $seq->add();
-            $seqlib = M('seqlib');
-            $seqlib->addAll($seqlibdata);
-            $this->success('送样信息添加成功',U('seq/index'));
-
-        }else{
-            $lib = M('library')->order('id desc')->select();
-            $this->assign('lib', $lib);
-            $this->display(add);
+        if(!$seqdata['lib_ids']) {
+            $this->error("创建送测失败：请选择至少一个文库");
         }
 
+        $seq = M('seq');
+        $seq_id = $seq->add($seqdata);
+
+        // create seqresult for each library
+
+        $library = M('library');
+
+        $lib_ids = $seqdata['lib_ids'];
+        $seqresult = M('seqresult');
+        foreach ($lib_ids as $lib_id) {
+            $seqresult_data = array(
+                'seq_id' => intval($seq_id),
+                'lib_id' => intval($lib_id)
+            );
+
+            $seqresult->add($seqresult_data);
+
+            // 更新文库的送测状态
+
+            $library->where('id=' . intval($lib_id))->save(array(
+                'seqed' => $seqresult->where('lib_id=' . intval($lib_id))->count()
+            ));
+        }
+
+        $seq->where('id=' . intval($seq_id))->save(array(
+            'lib_count' => $seqresult->where('seq_id=' . intval($seq_id))->count()
+        ));
+
+        action_log('create_seq','seq',$uid,$uid);
+        $this->redirect('seq/index');
+    }
+
+    public function processSeqData() {
+        return array(
+            'id' => $_POST['id'],
+            'lib_ids' => $_POST['lib_ids'],
+            'title' => $_POST['title'],
+            'company' => $_POST['company'],
+            'send_date' => strtotime($_POST['send_date']),
+            'operator' => is_login(),
+            'create_time' => time(),
+            'update_time' => 0,
+            'comment' => $_POST['comment']
+        );
+    }
+
+    public function add(){
         
+        // if($_POST){
+        //     $seqdata['seq_id'] = time_format(time(),"Ymd").sprintf("%03d", is_login()).sprintf("%04d",$_POST['seq_id']);
+        //     $seqdata['company'] = $_POST['company'];
+        //     $seqdata['send_date'] = strtotime($_POST['send_date']);
+        //     $seqdata['create_time'] = time();
+        //     $seqdata['update_time'] = time();
+        //     $seqdata['operator'] = is_login();
+        //     $seqdata['comment'] = $_POST['seq_comment'];
+
+        //     $platform = $_POST['platform'];
+        //     $seqtype = $_POST['seqtype'];
+        //     $lib_volume = $_POST['lib_volume'];
+        //     $conc_qubit = $_POST['conc_qubit'];
+        //     $conc_qpcr = $_POST['conc_qpcr'];
+        //     $peak = $_POST['peak'];
+        //     $comment = $_POST['comment'];
+
+
+        //     $lib_id = $_POST['lib_id'];
+        //     foreach ($lib_id as $key => $libid) {
+        //         $seqlibdata[] = array(  'seq_id' => $seqdata['seq_id'], 
+        //                                 'lib_id' => $libid,
+        //                                 'platform' => $platform[$key],
+        //                                 'seqtype' => $seqtype[$key],
+        //                                 'lib_volume' => $lib_volume[$key],
+        //                                 'conc_qubit' => $conc_qubit[$key],
+        //                                 'conc_qpcr' => $conc_qpcr[$key],
+        //                                 'peak' => $peak[$key],
+        //                                 'comment' => $comment[$key]
+        //                                 );
+        //     }
+
+        //     $seq = M('seq');
+        //     $seq->create($seqdata);
+        //     $seq->add();
+        //     $seqlib = M('seqlib');
+        //     $seqlib->addAll($seqlibdata);
+        //     $this->success('送样信息添加成功',U('seq/index'));
+
+        $lib_ids = trim($_GET['lib_ids']);
+        if(!$lib_ids) {
+            $this->error("送测失败，无效的文库信息");
+        }
+
+        $libs = M('library')->where('id IN (' . trim($lib_ids) . ')')->select();
+        $this->assign('libs', $libs);
+        $this->assign('edit_action', 'add_seq');
+        $this->display(edit);
     }
 
     public function del(){
@@ -86,7 +142,6 @@ class SeqController extends AdminController {
             $seqdata['send_date'] = strtotime($_POST['send_date']);
             $seqdata['update_time'] = time();
             $seqdata['comment'] = $_POST['seq_comment'];
-
             $seqlib_id = $_POST['seqlib_id'];
             $lib_id = $_POST['lib_id'];
             $platform = $_POST['platform'];
@@ -138,17 +193,20 @@ class SeqController extends AdminController {
     }
 
     public function detail(){
-        $seq = M('seq');
-        $condition['id'] = I('sid');
-        $result = $seq->where($condition)->select();
-        $seqid = $seq->where($condition)->getField('seq_id');
         $uid = is_login();
 
-        $seqlib = M('seqlib');
-        $seqlibinfo = $seqlib->where('seq_id='.$seqid)->select();
+        $seq = M('seq');
+        $condition['id'] = I('sid');
+        $seq_info = $seq->where($condition)->find();
 
-        $this->assign('seq',$result[0]);
-        $this->assign('seqlibinfo',$seqlibinfo);
+        $seqresult = M('seqresult');
+        $seq_results = $seqresult->where('seq_id='. intval($seq_info['id']))->select();
+        foreach ($seq_results as $key => $val) {
+            $seq_results[$key]['lib_info'] = M('library')->where('id=' . intval($val['lib_id']))->find();
+        }
+
+        $this->assign('seq_info', $seq_info);
+        $this->assign('seq_results',$seq_results);
         $this->assign('uid',$uid);
         $this->display(detail);
     }

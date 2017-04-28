@@ -26,6 +26,11 @@ label small {
 	font-weight: 400;
 }
 
+.m-b-25 {
+	margin-bottom: 25px !important;
+}
+
+
 .table-bordered > thead > tr > th {
 	border-bottom-width: 1px !important;
 }
@@ -58,4 +63,47 @@ label small {
     text-align: center;
     padding: 30px;
     border-top: 1px solid #eee;
+}
+
+.panel-heading h3 {
+	line-height: 30px;
+	display: inline-block;
+}
+
+.panel-actions {
+	float: right;
+	display: inline-block;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.panel-actions .btn {
+	margin-right: 15px;
+}
+
+.panel-actions .btn:last-child {
+	margin-right: 0;
+}
+
+.detail-info {
+	margin-top: 40px;
+}
+
+.detail-item {
+	margin: 15px 0;
+}
+
+.detail-item dt {
+	margin-bottom: 10px;
+}
+
+.detail-item dd {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #eee;
+}
+
+/*library styles*/
+
+.sel-lib {
+	margin-right: 15px;
 }

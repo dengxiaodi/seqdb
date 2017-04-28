@@ -1,66 +1,101 @@
 <include file="Public/header"/>
 
     <div class="container">
-        <div class="row page-header">
+        <div class="row detail-info">
             <div class="col-md-12">
-                <h1>样本详情</h1>
-                <eq name="sample['operator']" value="$uid">
-                    <div class="header-actions">
-                        <a class="btn btn-primary" href="__URL__/update/sid/{$sample['id']}" role="button">修改样本信息</a>
-                        <a class="btn btn-danger" href="__URL__/del/sid/{$sample['id']}" role="button">删除此样本</a> 
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3>样本信息：{$sample['name']}</h3>
+                        <div class="panel-actions">
+                            <a class="btn btn-sm btn-primary" href="__URL__/update/sid/{$sample['id']}" role="button">修改样本信息</a>
+                            <a class="btn btn-sm btn-danger" href="__URL__/del/sid/{$sample['id']}" role="button">删除此样本</a> 
+                        </div>
                     </div>
-                </eq>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th width="30%">项目</th>
-                            <th>描述</th>
-                        </tr>
-                    </thead>             
-                    <tbody>
-                        <tr><td>样本名称</td><td>{$sample['name']}</td>
-                        <tr><td>样本类型</td><td>{$sample['type']}</td>
-                        <tr><td>样本描述</td><td>{$sample['description']}</td>
-                        <tr><td>样本来源</td><td>{$sample['source']}</td>
-                        <tr><td>样本提取时间</td><td>{:time_format($sample['obtain_time'],"Y-m-d")}</td>
-                        <tr><td>样本剩余量</td><td>{$sample['remain']}</td>
-                        <tr><td>提取核酸类型</td><td>{$sample['nucleic_acid']}</td>
-                        <tr><td>提取方法</td><td>{$sample['method']}</td>
-                        <tr><td>样本浓度(Qubit2.0)</td><td>{$sample['concentration']}</td>
-                        <tr><td>样本溶液量</td><td>{$sample['amount']}</td>
-                        <tr><td>核酸质量</td><td>{$sample['mass']}</td>
-                        <tr><td>已使用体积</td><td>{$sample['used_volume']}</td>
-                        <tr><td>已使用质量</td><td>{$sample['used_mass']}</td>
-                        <tr><td>剩余质量</td><td>{$sample['rest']}</td>
-                        <tr><td>提取时间</td><td>{:time_format($sample['extraction_data'],"Y-m-d")}</td>
-                        <tr><td>操作人员</td><td>{:get_nickname($sample['operator'])}</td>
-                        <tr><td>创建时间</td><td>{:time_format($sample['create_time'],"Y-m-d")}</td>
-                        <tr><td>更新时间</td><td>{:time_format($sample['update_time'],"Y-m-d")}</td>
-                        <tr><td>备注</td><td>{$sample['comment']}</td>
-                    </tbody>
-                </table>
+                    <div class="panel-body">
+                        <dl>
+                            <div class="detail-item col-md-4">
+                                <dt>样本名称</dt><dd>{$sample['name']}</dd>
+                            </div>
+                            
+                            <div class="detail-item col-md-4">
+                                <dt>样本类型</dt><dd>{$sample['type']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>样本描述</dt><dd>{$sample['description']}</dd>
+                            </div>
+                            
+                            <div class="detail-item col-md-4">
+                                <dt>样本来源</dt><dd>{$sample['source']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>样本提取时间</dt><dd>{:time_format($sample['obtain_time'],"Y-m-d")}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>样本剩余量</dt><dd>{$sample['remain']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>提取核酸类型</dt><dd>{$sample['nucleic_acid']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>提取方法</dt><dd>{$sample['method']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>样本浓度(Qubit2.0)</dt><dd>{$sample['concentration']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>样本溶液量</dt><dd>{$sample['amount']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>核酸质量</dt><dd>{$sample['mass']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>已使用体积</dt><dd>{$sample['used_volume']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>已使用质量</dt><dd>{$sample['used_mass']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>剩余质量</dt><dd>{$sample['rest']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>提取时间</dt><dd>{:time_format($sample['extraction_data'],"Y-m-d")}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>操作人员</dt><dd>{:get_nickname($sample['operator'])}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>创建时间</dt><dd>{:time_format($sample['create_time'],"Y-m-d")}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>更新时间</dt><dd>{:time_format($sample['update_time'],"Y-m-d")}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>备注</dt><dd>{$sample['comment']}</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
-    <include file="Public/pageFooter" />
-    
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
     <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" language="javascript" class="init">
-        $(document).ready(function() {
-            $('#datatable').DataTable({paging: false,ordering:  false
-        });
-        } );
-    </script>
     </body>
 </html>

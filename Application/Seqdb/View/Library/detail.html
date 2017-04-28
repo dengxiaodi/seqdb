@@ -1,63 +1,85 @@
 <include file="Public/header"/>
-
     <div class="container">
-        <div class="row page-header">
+        <div class="row detail-info">
             <div class="col-md-12">
-                <h1>文库详情</h1>
-                <eq name="library['operator']" value="$uid">
-                    <div class="header-actions">
-                        <a class="btn btn-primary" href="__URL__/update/sid/{$sample['id']}" role="button" target="_blank">修改文库</a>
-                        <a class="btn btn-danger" href="__URL__/del/sid/{$sample['id']}" role="button" target="_blank">删除文库</a> 
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3>文库信息：{$library['title']}</h3>
+                        <eq name="library['operator']" value="$uid">
+                            <div class="panel-actions">
+                                <a class="btn btn-sm btn-primary" href="__URL__/update/sid/{$sample['id']}" role="button" target="_blank">修改文库</a>
+                                <a class="btn btn-sm btn-danger" href="__URL__/del/sid/{$sample['id']}" role="button" target="_blank">删除文库</a> 
+                            </div>
+                        </eq>
                     </div>
-                </eq>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th width="30%">项目</th>
-                            <th>描述</th>
-                        </tr>
-                    </thead>             
-                    <tbody >
-                        <tr><td>文库名称</td><td>{$library['title']}</td></tr>
-                        <tr>
-                            <td>建库样本</td><td><a href="{:U('Sample/detail', 'sid=' . intval($library['sample_id']))}">{$library['sample_info']['name']}</a></td>
-                        </tr>
-                        <tr><td>建库试剂盒</td><td>{$library['kit']}</td></tr>
-                        <tr><td>PCR循环数</td><td>{$library['cycle_num']}</td></tr>
-                        <tr><td>起始模板质量</td><td>{$library['template_mass']}</td></tr>
-                        <tr><td>文库体积</td><td>{$library['lib_volume']}</td></tr>
-                        <tr><td>Qubit 2.0测定浓度</td><td>{$library['conc_qubit']}</td></tr>
-                        <tr><td>qPCR 测定浓度</td><td>{$library['conc_qpcr']}</td></tr>
-                        <tr><td>2100测定峰值</td><td>{$library['peak']}</td></tr>
-                        <tr><td>建库时间</td><td>{:time_format($library['create_date'],"Y-m-d")}</td></tr>
-                        <tr><td>建库人</td><td>{:get_nickname($library['operator'])}</td></tr>
-                        <tr><td>创建信息时间</td><td>{:time_format($library['create_time'],"Y-m-d")}</td></tr>
-                        <tr><td>更新信息时间</td><td>{:time_format($library['update_time'],"Y-m-d")}</td></tr>
-                        <tr><td>备注信息</td><td>{$library['comment']}</td></tr>
-                    </tbody>
-                </table>
+                    <div class="panel-body">
+                        <dl>
+                            <div class="detail-item col-md-4">
+                                <dt>文库名称</dt>
+                                <dd>{$library['title']}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>建库样本</dt>
+                                <dd><a href="{:U('Sample/detail', 'sid=' . intval($library['sample_id']))}">{$library['sample_info']['name']}</a></dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>建库试剂盒</dt>
+                                <dd>{$library['kit']}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>PCR循环数</dt>
+                                <dd>{$library['cycle_num']}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>起始模板质量</dt>
+                                <dd>{$library['template_mass']}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>文库体积</dt>
+                                <dd>{$library['lib_volume']}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>Qubit 2.0测定浓度</dt>
+                                <dd>{$library['conc_qubit']}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>qPCR 测定浓度</dt>
+                                <dd>{$library['conc_qpcr']}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>2100测定峰值</dt>
+                                <dd>{$library['peak']}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>建库时间</dt>
+                                <dd>{:time_format($library['create_date'],"Y-m-d")}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>建库人</dt>
+                                <dd>{:get_nickname($library['operator'])}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>创建信息时间</dt>
+                                <dd>{:time_format($library['create_time'],"Y-m-d")}</dd>
+                            </div>
+
+                            <div class="detail-item col-md-4">
+                                <dt>更新信息时间</dt>
+                                <dd>{:time_format($library['update_time'],"Y-m-d")}</dd>
+                            </div>
+                            <div class="detail-item col-md-4">
+                                <dt>备注信息</dt>
+                                <dd>{$library['comment']}</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
-    <include file="Public/pageFooter" />
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
     <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" language="javascript" class="init">
-        $(document).ready(function() {
-            $('#datatable').DataTable({paging: false,ordering:  false
-        });
-        } );
-    </script>
     </body>
 </html>
