@@ -1,6 +1,7 @@
 <include file="Public/header"/>
     <div class="container">
         <form  method="post" action="__URL__/{$edit_action}">
+            <input type="hidden" name="id" value="{$seq_info['id']}">
             <div class="row page-header">
                 <div class="col-md-12">
                     <h1>编辑测序信息</h1>
@@ -36,35 +37,32 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>送测文库</th>
-                                <?php if($seq_info) { ?>
-                                    <th>测序结果</th>
-                                <?php } ?>
-                                <th class="text-center">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <foreach name="libs" item="obj">
+                    
+                    <?php if($seq_info) { ?>
+                        <include file="Seq/libs" />
+                    <?php } else { ?>
+                        <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                            <thead>
                                 <tr>
-                                    <input type="hidden" name="lib_ids[]" value="{$obj.id}">
-                                    <td>
-                                        <a href="{:U('library/detail', 'sid=' . intval($obj['id']))}">{$obj['title']}</a>
-                                    </td>
-                                    <?php if($seq_info) {　?>
-                                        <td>
-                                            <a href="#">编辑测序结果</a>
-                                        </td>
-                                        <td>删除</td>
-                                    <?php } else { ?>
-                                        <td class="text-center"><a class="remove-lib" href="javascript:void(0);">删除</a></td>
-                                    <?php } ?>
+                                    <th>送测文库</th>
+                                    <th class="text-center">操作</th>
                                 </tr>
-                            </foreach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <foreach name="libs" item="obj">
+                                    <tr>
+                                        <input type="hidden" name="lib_ids[]" value="{$obj.id}">
+                                        <td>
+                                            <a href="{:U('library/detail', 'sid=' . intval($obj['id']))}">{$obj['title']}</a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="remove-lib" href="javascript:void(0);">删除</a>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </tbody>
+                        </table>
+                    <?php } ?> 
                 </div>
             </div>
             

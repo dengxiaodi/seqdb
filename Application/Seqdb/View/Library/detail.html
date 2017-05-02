@@ -4,11 +4,11 @@
             <div class="col-md-12">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3>文库信息：{$library['title']}</h3>
-                        <eq name="library['operator']" value="$uid">
+                        <h3>文库信息：{$library_info['title']}</h3>
+                        <eq name="library_info['operator']" value="$uid">
                             <div class="panel-actions">
-                                <a class="btn btn-sm btn-primary" href="__URL__/update/sid/{$sample['id']}" role="button" target="_blank">修改文库</a>
-                                <a class="btn btn-sm btn-danger" href="__URL__/del/sid/{$sample['id']}" role="button" target="_blank">删除文库</a> 
+                                <a class="btn btn-sm btn-primary" href="__URL__/update/sid/{$library_info['id']}" role="button"><span class="glyphicon glyphicon-pencil"></span> 编辑文库信息</a>
+                                <!-- <a class="btn btn-sm btn-danger" href="__URL__/del/sid/{$sample['id']}" role="button" target="_blank">删除文库</a> --> 
                             </div>
                         </eq>
                     </div>
@@ -16,61 +16,61 @@
                         <dl>
                             <div class="detail-item col-md-4">
                                 <dt>文库名称</dt>
-                                <dd>{$library['title']}</dd>
+                                <dd>{$library_info['title']}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>建库样本</dt>
-                                <dd><a href="{:U('Sample/detail', 'sid=' . intval($library['sample_id']))}">{$library['sample_info']['name']}</a></dd>
+                                <dd><a href="{:U('Sample/detail', 'sid=' . intval($library_info['sample_id']))}">{$library_info['sample_info']['name']}</a></dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>建库试剂盒</dt>
-                                <dd>{$library['kit']}</dd>
+                                <dd>{$library_info['kit']}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>PCR循环数</dt>
-                                <dd>{$library['cycle_num']}</dd>
+                                <dd>{$library_info['cycle_num']}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>起始模板质量</dt>
-                                <dd>{$library['template_mass']}</dd>
+                                <dd>{$library_info['template_mass']}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>文库体积</dt>
-                                <dd>{$library['lib_volume']}</dd>
+                                <dd>{$library_info['lib_volume']}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>Qubit 2.0测定浓度</dt>
-                                <dd>{$library['conc_qubit']}</dd>
+                                <dd>{$library_info['conc_qubit']}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>qPCR 测定浓度</dt>
-                                <dd>{$library['conc_qpcr']}</dd>
+                                <dd>{$library_info['conc_qpcr']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
                                 <dt>2100测定峰值</dt>
-                                <dd>{$library['peak']}</dd>
+                                <dd>{$library_info['peak']}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>建库时间</dt>
-                                <dd>{:time_format($library['create_date'],"Y-m-d")}</dd>
+                                <dd>{:time_format($library_info['create_date'],"Y-m-d")}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>建库人</dt>
-                                <dd>{:get_nickname($library['operator'])}</dd>
+                                <dd>{:get_nickname($library_info['operator'])}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>创建信息时间</dt>
-                                <dd>{:time_format($library['create_time'],"Y-m-d")}</dd>
+                                <dd>{:time_format($library_info['create_time'],"Y-m-d")}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
                                 <dt>更新信息时间</dt>
-                                <dd>{:time_format($library['update_time'],"Y-m-d")}</dd>
+                                <dd>{:time_format($library_info['update_time'],"Y-m-d")}</dd>
                             </div>
                             <div class="detail-item col-md-4">
                                 <dt>备注信息</dt>
-                                <dd>{$library['comment']}</dd>
+                                <dd>{$library_info['comment']}</dd>
                             </div>
                         </dl>
                     </div>

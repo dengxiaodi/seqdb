@@ -5,7 +5,11 @@
                     <h1>文库列表</h1>
                     <div class="header-actions">
                         <span class="sel-lib hidden">当前共选择了<b id="sel-lib-count">3</b>个文库</span>
-                        <a id="send-lib" data-selected-ids="" class="btn btn-warning disabled" data-toggle="tooltip" title="请先选择需要送测的文库" href="{:U('Seq/add')}" role="button"><span class="glyphicon glyphicon-send"></span> 选择文库送测</a>
+                        <?php if(!$_GET['seq_id']) { ?>
+                            <a id="send-lib" data-selected-ids="" class="btn btn-warning disabled" data-toggle="tooltip" title="请先选择需要送测的文库" href="{:U('Seq/add')}" role="button"><span class="glyphicon glyphicon-send"></span> 新建测序</a>
+                        <?php } else { ?>
+                            <a id="add-to-seq" data-selected-ids="" class="btn btn-warning disabled" data-toggle="tooltip" title="请先选择需要送测的文库" href="{:U('Seq/append_lib', 'seq_id=' . intval($_GET['seq_id']))}" role="button"><span class="glyphicon glyphicon-plus"></span> 添加到测序</a>
+                        <?php } ?>
                         <a class="btn btn-primary" href="{:U('Sample/index')}" role="button"><span class="glyphicon glyphicon-plus"></span> 从样本创建文库</a>
                     </div>
                 </div>
@@ -27,7 +31,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <foreach name="library" item="obj">
+                                <foreach name="library_list" item="obj">
                                     <tr>
                                         <td class="text-center"><input class="check-lib" type="checkbox" data-lib-id="{$obj['id']}"></td>
                                         <td>
@@ -43,7 +47,7 @@
                                                 <else /> <span class="c-red">未送测</span>
                                             </if>
                                         </td>
-                                        <td><eq name="obj['operator']" value="$uid"><a href="__URL__/update/sid/{$obj.id}">编辑</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a></eq>
+                                        <td><eq name="obj['operator']" value="$uid"><a href="__URL__/update/sid/{$obj.id}">编辑</a> | <a class="remove-library" href="__URL__/del/sid/{$obj.id}">删除</a></eq>
                                         </td>
                                     </tr>
                                 </foreach>
@@ -67,8 +71,12 @@
                 // 选择文库
 
                 $('body').on('click', '.check-lib', function() {
-                    var $sendButton = $('#send-lib');
-                    var checkIds = $sendButton.attr('data-selected-ids');
+                    var $actionButton = $('#send-lib');
+                    if(!$actionButton.length) {
+                        $actionButton = $('#add-to-seq');
+                    }
+
+                    var checkIds = $actionButton.attr('data-selected-ids');
 
                     $this = $(this);
                     var ids = [];
@@ -88,14 +96,14 @@
                         }
                     }
 
-                    $sendButton.attr('data-selected-ids', ids.join(','));
+                    $actionButton.attr('data-selected-ids', ids.join(','));
                     var checkedCount = ids.length;
                     $('#sel-lib-count').text(checkedCount);
                     $('.sel-lib').toggleClass('hidden', (checkedCount <= 0));
-                    $('#send-lib').toggleClass('disabled', (checkedCount <= 0));
+                    $actionButton.toggleClass('disabled', (checkedCount <= 0));
                 });
 
-                // 送出测序
+                // 新建测序
 
                 $('#send-lib').on('click', function(e) {
                     e.preventDefault();
@@ -103,7 +111,35 @@
 
                     var url = $this.attr('href') + '&lib_ids=' + $this.attr('data-selected-ids');
                     window.location.href = url;
-                })
+                });
+
+                $('#add-to-seq').on('click', function(e) {
+                    e.preventDefault();
+                    $this = $(this);
+
+                    var url = $this.attr('href') + '&lib_ids=' + $this.attr('data-selected-ids');
+                    window.location.href = url;
+                });
+
+                // 删除文库
+
+                $('body').on('click', '.remove-library', function(e){
+                    var $this = $(this);
+                    e.preventDefault();
+
+                    swal({
+                        title: '删除文库',
+                        text: "删除文库后，所有后续测序及数据结构都将被删除。确认删除样本？",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#9f9f9f',
+                        confirmButtonText: '确定删除',
+                        cancelButtonText: '取消'
+                    }).then(function () {
+                        window.location.href = $this.attr('href');
+                    }).catch(swal.noop);
+                });
             });
         </script>
     </body>

@@ -30,10 +30,10 @@
                                     </td>
                                     <td>{$obj['lib_count']}</td>
                                     <td>{$obj['company']}</td>
-                                    <td>{:time_format($obj['send_data'],"Y-m-d")}</td>
+                                    <td>{:time_format($obj['send_date'],"Y-m-d")}</td>
                                     <td>{:get_nickname($obj['operator'])}</td>
                                     <td class="text-center">
-                                        <eq name="obj['operator']" value="$uid"><a href="{:U('seq/update', 'sid=' . intval($obj['id']))}">编辑</a> | <a href="{:U('seq/del', 'sid=' . intval($obj['id']))}">删除</a></eq>
+                                        <eq name="obj['operator']" value="$uid"><a href="{:U('seq/update', 'sid=' . intval($obj['id']))}">编辑</a> | <a class="remove-seq" href="{:U('seq/del', 'sid=' . intval($obj['id']))}">删除</a></eq>
                                     </td>
                                 </tr>
                             </foreach>
@@ -51,9 +51,28 @@
         <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
         <script type="text/javascript" language="javascript" class="init">
             $(document).ready(function() {
-                $('#datatable').DataTable({"order":[[0,"desc"]],
-            });
-            } );
+                $('#datatable').DataTable({
+                    "order":[[0,"desc"]],
+                });
+
+                $('body').on('click', '.remove-seq', function(e){
+                    var $this = $(this);
+                    e.preventDefault();
+
+                    swal({
+                        title: '删除测序',
+                        text: "你确定要删除该次测序？所有的测序结果和相关数据都将被删除",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#9f9f9f',
+                        confirmButtonText: '确定删除',
+                        cancelButtonText: '取消'
+                    }).then(function () {
+                        window.location.href = $this.attr('href');
+                    }).catch(swal.noop);
+                });
+            }); 
         </script>
     </body>
 </html>

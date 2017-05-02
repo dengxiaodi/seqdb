@@ -27,55 +27,13 @@
                             <dt>备注信息</dt>
                             <dd>{$seq_info['comment']}</dd>
                         </div>
-                     
-                        <!-- <div class="col-md-12" style="margin-top: 20px;">
-                            <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">文库编号</th>
-                                        <th class="text-center">测序平台</th>
-                                        <th class="text-center">测序类型</th>
-                                    </tr>
-                                </thead>             
-                                <tbody class="text-center" >
-                                    <foreach name="seqlibinfo" item="info">
-                                        <tr><td><a href="{:get_libinfo($info['lib_id'])}">{$info['lib_id']}</a></td><td>{$info['platform']}</td><td>{$info['seqtype']}</td></tr>
-                                    </foreach>
-                                </tbody>
-                            </table>
-                        </div> -->
-                        
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3 class="m-b-25 text-center">共 {$seq_info['lib_count']} 项文库</h3>
-                <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>送测文库</th>
-                            <th class="text-center">测序结果</th>
-                            <th class="text-center">测序数据</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <foreach name="seq_results" item="obj">
-                            <tr>
-                                <td>
-                                    <a href="{:U('library/detail', 'sid=' . intval($obj['lib_id']))}">{$obj['lib_info']['title']}</a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="#">查看</a> | <a href="#">编辑</a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="#">查看</a> | <a href="#">添加</a>
-                                </td>
-                            </tr>
-                        </foreach>
-                    </tbody>
-                </table>
+                <include file="Seq/libs" />
             </div>
         </div>
     </div>

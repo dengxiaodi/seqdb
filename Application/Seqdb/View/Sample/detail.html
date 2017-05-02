@@ -5,88 +5,87 @@
             <div class="col-md-12">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3>样本信息：{$sample['name']}</h3>
+                        <h3>样本信息：{$sample_info['name']}</h3>
                         <div class="panel-actions">
-                            <a class="btn btn-sm btn-primary" href="__URL__/update/sid/{$sample['id']}" role="button">修改样本信息</a>
-                            <a class="btn btn-sm btn-danger" href="__URL__/del/sid/{$sample['id']}" role="button">删除此样本</a> 
+                            <a class="btn btn-sm btn-primary" href="__URL__/update/sid/{$sample_info['id']}" role="button"><span class="glyphicon glyphicon-pencil"></span> 编辑样本信息</a>
                         </div>
                     </div>
                     <div class="panel-body">
                         <dl>
                             <div class="detail-item col-md-4">
-                                <dt>样本名称</dt><dd>{$sample['name']}</dd>
+                                <dt>样本名称</dt><dd>{$sample_info['name']}</dd>
                             </div>
                             
                             <div class="detail-item col-md-4">
-                                <dt>样本类型</dt><dd>{$sample['type']}</dd>
+                                <dt>样本类型</dt><dd>{$sample_info['type']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>样本描述</dt><dd>{$sample['description']}</dd>
+                                <dt>样本描述</dt><dd>{$sample_info['description']}</dd>
                             </div>
                             
                             <div class="detail-item col-md-4">
-                                <dt>样本来源</dt><dd>{$sample['source']}</dd>
+                                <dt>样本来源</dt><dd>{$sample_info['source']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>样本提取时间</dt><dd>{:time_format($sample['obtain_time'],"Y-m-d")}</dd>
+                                <dt>样本提取时间</dt><dd>{:time_format($sample_info['obtain_time'],"Y-m-d")}</dd>
+                            </div>
+                            
+                            <div class="detail-item col-md-4">
+                                <dt>样本剩余量</dt><dd>{$sample_info['remain']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>样本剩余量</dt><dd>{$sample['remain']}</dd>
+                                <dt>提取核酸类型</dt><dd>{$sample_info['nucleic_acid']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>提取核酸类型</dt><dd>{$sample['nucleic_acid']}</dd>
+                                <dt>提取方法</dt><dd>{$sample_info['method']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>提取方法</dt><dd>{$sample['method']}</dd>
+                                <dt>样本浓度(Qubit2.0)</dt><dd>{$sample_info['concentration']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>样本浓度(Qubit2.0)</dt><dd>{$sample['concentration']}</dd>
+                                <dt>样本溶液量</dt><dd>{$sample_info['amount']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>样本溶液量</dt><dd>{$sample['amount']}</dd>
+                                <dt>核酸质量</dt><dd>{$sample_info['mass']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>核酸质量</dt><dd>{$sample['mass']}</dd>
+                                <dt>已使用体积</dt><dd>{$sample_info['used_volume']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>已使用体积</dt><dd>{$sample['used_volume']}</dd>
+                                <dt>已使用质量</dt><dd>{$sample_info['used_mass']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>已使用质量</dt><dd>{$sample['used_mass']}</dd>
+                                <dt>剩余质量</dt><dd>{$sample_info['rest']}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>剩余质量</dt><dd>{$sample['rest']}</dd>
+                                <dt>提取时间</dt><dd>{:time_format($sample_info['extraction_data'],"Y-m-d")}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>提取时间</dt><dd>{:time_format($sample['extraction_data'],"Y-m-d")}</dd>
+                                <dt>操作人员</dt><dd>{:get_nickname($sample_info['operator'])}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>操作人员</dt><dd>{:get_nickname($sample['operator'])}</dd>
+                                <dt>创建时间</dt><dd>{:time_format($sample_info['create_time'],"Y-m-d")}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>创建时间</dt><dd>{:time_format($sample['create_time'],"Y-m-d")}</dd>
+                                <dt>更新时间</dt><dd>{:time_format($sample_info['update_time'],"Y-m-d")}</dd>
                             </div>
 
                             <div class="detail-item col-md-4">
-                                <dt>更新时间</dt><dd>{:time_format($sample['update_time'],"Y-m-d")}</dd>
-                            </div>
-
-                            <div class="detail-item col-md-4">
-                                <dt>备注</dt><dd>{$sample['comment']}</dd>
+                                <dt>备注</dt><dd>{$sample_info['comment']}</dd>
                             </div>
                         </dl>
                     </div>

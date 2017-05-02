@@ -16,24 +16,22 @@
                     <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
                         <thead>
                             <th>样品</th>
-                            <th>类型</th>
-                            <th>来源</th>
                             <th>描述</th>
                             <th>核酸类型</th>
+                            <th>添加时间</th>
                             <th>操作人员</th>
                             <th>操作</th></tr>
                         </thead>
                         
                         <tbody>
-                            <foreach name="sample" item="obj">
+                            <foreach name="sample_list" item="obj">
                                 <tr>
                                     <td><a href="__URL__/detail/sid/{$obj.id}"> {$obj['name']}</a></td>
-                                    <td>{$obj['type']}</td>
-                                    <td>{$obj['source']}</td>
                                     <td>{$obj['description']}</td>
                                     <td>{$obj['nucleic_acid']}</td>
+                                    <td>{:time_format($obj['create_date'],"Y-m-d")}</td>
                                     <td>{:get_nickname($obj['operator'])}</td>
-                                    <td><a href="__URL__/update/sid/{$obj.id}">修改</a> | <a href="__URL__/del/sid/{$obj.id}">删除</a> | <a href="{:U('Library/add?sample_id=' . intval($obj['id']))}">创建文库</a></eq></td>
+                                    <td><a href="__URL__/update/sid/{$obj.id}">编辑</a> | <a class="remove-sample" href="__URL__/del/sid/{$obj.id}">删除</a> | <a href="{:U('Library/add?sample_id=' . intval($obj['id']))}">创建文库</a></eq></td>
                                 </tr>
                             </foreach>
                         </tbody>
@@ -45,18 +43,31 @@
         </div>
         
         <include file="Public/pageFooter" />
-
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
         <script type="text/javascript" language="javascript" class="init">
             $(document).ready(function() {
-                $('#datatable').DataTable({"order":[[0,"desc"]],
+                $('#datatable').DataTable({
+                    "order":[[5,"desc"]],
+                });
+
+                $('body').on('click', '.remove-sample', function(e){
+                    var $this = $(this);
+                    e.preventDefault();
+
+                    swal({
+                        title: '删除样本',
+                        text: "删除样本后，所有相关建库和测序数据都将被删除。确认删除样本？",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#9f9f9f',
+                        confirmButtonText: '确定删除',
+                        cancelButtonText: '取消'
+                    }).then(function () {
+                        window.location.href = $this.attr('href');
+                    }).catch(swal.noop);
+                });
             });
-            } );
         </script>
     </body>
 </html>

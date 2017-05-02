@@ -5,15 +5,14 @@ use User\Api\UserApi as UserApi;
 class SampleController extends AdminController {
 
     public function index(){
-        $sample = M('sample');
-        $data = $sample->order('id desc')->select();
-        $uid = is_login();
-        $this->assign('uid',$uid);
-        $this->assign('sample',$data);
+        $Sample = D('Sample');
+
+        $this->assign('uid', UID);
+        $this->assign('sample_list', $Sample->sample_list());
         $this->display();
     }
 
-    function processSampleData() {
+    function process_sample_data() {
         return array('type' => $_POST['type'],
             'name' => $_POST['name'],
             'description' => $_POST['description'],
@@ -28,62 +27,58 @@ class SampleController extends AdminController {
             'used_volume' => $_POST['used_volume'],
             'used_mass' => $_POST['used_mass'],
             'rest' => $_POST['rest'],
-            'extraction_data' => strtotime($_POST['extraction_data']),
+            'extraction_date' => strtotime($_POST['extraction_date']),
             'create_time' => time(),
-            'operator' => is_login(),
+            'operator' => UID,
             'comment' => $_POST['comment']
         );
     }
 
+    public function add_sample() {
+        $sample_data = $this->process_sample_data();
+        $Sample = D('Sample');
+        $Sample->add_sample($sample_data);
+        action_log('create_sample','sample', UID, UID);
+        $this->redirect('sample/index');
+    }
+
     public function add(){
-        $uid = is_login();
-        if($_POST){
-                $data = $this->processSampleData();
-                $sample = M('sample');
-                $sample->data($data)->add();
-                action_log('create_sample','sample',$uid,$uid);
-                $this->redirect('sample/index');
-        } else {
-            $this->assign('edit_action', 'add');
-            $this->display(edit);
-        }
+        $this->assign('edit_action', 'add_sample');
+        $this->display('edit');
     }
 
     public function del(){
-        $uid = is_login();
-        $sample = M('sample');
-        $condition['id'] = I('sid');
-        $sample->where($condition)->delete();
+        $Sample = D('Sample');
+        $Sample->delete_sample(I('sid'));
         $this->redirect('sample/index');
-        action_log('delete_sample','sample',$uid,$uid);
+        action_log('delete_sample','sample', UID, UID);
+    }
+
+    public function update_sample() {
+        $sample_id = $_POST['sid'];
+
+        $sample_data = $this->process_sample_data();
+        $Sample = D('Sample');
+        $Sample->update_sample($sample_id, $sample_data);
+
+        action_log('update_sample','sample', UID, UID);
+        $this->redirect('sample/index');
     }
 
     public function update(){
-        $uid = is_login();
-        $condition['id'] = I('sid');
-        if($_POST){
-            $data = $this->processSampleData();
-            $sample = M('sample');
-            $sample->where('id=' . intval($_POST['sid']))->save($data);
-            action_log('update_sample','sample',$uid,$uid);
-            $this->redirect('sample/index');
-        }else{
-            $sample = M('sample');
-            $result = $sample->where($condition)->select();
-            $this->assign('sample',$result[0]);
-            $this->assign('edit_action', 'update/sid/' . I('sid'));
-            $this->display(edit);
-        }
+        $Sample = D('Sample');
+        $sample_info = $Sample->sample_info(I('sid'));
+        $this->assign('sample_info', $sample_info);
+        $this->assign('edit_action', 'update_sample');
+        $this->display('edit');
     }
 
     public function detail(){
-        $sample = M('sample');
-        $condition['id'] = I('sid');
-        $result = $sample->where($condition)->select();
-        $uid = is_login();
-        $this->assign('uid',$uid);
-        $this->assign('sample',$result[0]);
-        $this->display(detail);
+        $Sample = D('Sample');
+        $sample_info = $Sample->sample_info(I('sid'));
+         
+        $this->assign('uid', UID);
+        $this->assign('sample_info', $sample_info);
+        $this->display('detail');
     }
-
 }
