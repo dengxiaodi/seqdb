@@ -24,7 +24,11 @@ class LibraryModel extends Model{
 	}
 
 	public function library_infos($lib_ids) {
-		return $this->where('id IN (' . trim($lib_ids) . ')')->select();
+		if(is_array($lib_ids) && count($lib_ids) > 0) {
+			return $this->where('id IN (' . implode(',', $lib_ids) . ')')->select();
+		}
+
+		return false;
 	}
 
 	public function add_library($library_data) {

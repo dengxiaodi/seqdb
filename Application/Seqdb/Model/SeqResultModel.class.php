@@ -20,6 +20,12 @@ class SeqResultModel extends Model{
         return $results;
 	}
 
+	public function seq_result_info($seq_result_id) {
+		return  $this->where(array(
+			'id' => intval($seq_result_id)
+		))->find();
+	}
+
 	public function seq_lib_ids($seq_id) {
 		return $this->where(array(
 			'seq_id' => intval($seq_id)
@@ -43,11 +49,21 @@ class SeqResultModel extends Model{
 	public function delete_seq_result($seq_result_id) {
 		// 删除数据记录
 
+		$seq_result_info = $this->seq_result_info($seq_result_id);
+
 		// 删除测序结果记录
 
 		$this->where(array(
         	'id' => intval($seq_result_id)
         ))->delete();
+
+        // 更新文库记录及结果
+
+        $Library = D('Library');
+        $Seq = D('Seq');
+
+        $Seq->update_lib_count($seq_result_info['seq_id']);
+        $Library->update_seqed($seq_result_info['lib_id']);
 	}
 
 	public function update_seq_result($seq_result_id, $seq_result_data) {

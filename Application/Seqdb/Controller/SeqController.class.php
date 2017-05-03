@@ -43,7 +43,7 @@ class SeqController extends AdminController {
         if(!$lib_ids) {
             $this->error("新建送测失败，无效的文库信息");
         }
-        
+        $lib_ids = explode(',', $lib_ids);
         $Library = D('Library');
         $libs = $Library->library_infos($lib_ids);
 
@@ -52,7 +52,7 @@ class SeqController extends AdminController {
         $this->display('edit');
     }
 
-    public function append_lib() {
+    public function add_lib() {
         $seq_id = trim($_GET['seq_id']);
         $lib_ids = trim($_GET['lib_ids']);
 
@@ -64,7 +64,10 @@ class SeqController extends AdminController {
             $this->error("添加文库失败，无效的文库信息");
         }
 
-        $Library = D('Library');
+        $lib_ids = explode(',', $lib_ids);
+
+        $Seq = D('Seq');
+        $Seq->add_seq_libs($seq_id, $lib_ids);
 
         $this->redirect('Seq/detail?sid=' . intval($seq_id));
     }

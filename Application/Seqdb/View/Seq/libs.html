@@ -16,13 +16,13 @@
                     <a href="{:U('library/detail', 'sid=' . intval($obj['lib_id']))}">{$obj['library_info']['title']}</a>
                 </td>
                 <td class="text-center">
-                    <a href="#">查看</a> | <a href="#">编辑</a>
+                    <a href="#">查看</a> | <a href="{:U('seqresult/update', 'sid=' . intval($obj['id']) . '&return=' . CURRENT_URL)}">编辑</a>
                 </td>
                 <td class="text-center">
                     <a href="#">查看</a> | <a href="#">添加</a>
                 </td>
                 <td class="text-center">
-                    <a href="#">删除</a>
+                    <a class="remove-seqresult" href="{:U('seqresult/del', 'sid=' . intval($obj['id']) . '&return=' . CURRENT_URL)}">删除</a>
                 </td>
             </tr>
         </foreach>

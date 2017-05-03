@@ -12,6 +12,8 @@
  * 主要定义后台公共函数库
  */
 
+defined('CURRENT_URL') or define('CURRENT_URL', base64_encode($_SERVER["REQUEST_URI"]));
+
 /**
  * 获取扩展模型对象
  * @param  integer $model_id 模型编号
@@ -533,3 +535,18 @@ function export_csv(&$data, $title_arr, $file_name = '') {
         header('Pragma:public');
         echo $csv_data;
     }
+
+function urlsafe_b64encode($string) {
+   $data = base64_encode($string);
+   $data = str_replace(array('+','/','='),array('-','_',''),$data);
+   return $data;
+}
+
+function urlsafe_b64decode($string) {
+   $data = str_replace(array('-','_'),array('+','/'),$string);
+   $mod4 = strlen($data) % 4;
+   if ($mod4) {
+       $data .= substr('====', $mod4);
+   }
+   return base64_decode($data);
+}

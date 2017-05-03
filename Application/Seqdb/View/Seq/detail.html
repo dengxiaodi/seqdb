@@ -6,6 +6,9 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3>测序信息：{$seq_info['title']}</h3>
+                        <div class="panel-actions">
+                            <a class="btn btn-sm btn-primary" href="__URL__/update/sid/{$seq_info['id']}" role="button"><span class="glyphicon glyphicon-pencil"></span> 编辑测序信息</a>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="col-md-4 detail-item">
@@ -39,5 +42,6 @@
     </div>
     
     <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/seq.js"></script>
     </body>
 </html>

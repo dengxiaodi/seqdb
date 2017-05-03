@@ -8,7 +8,7 @@
                         <?php if(!$_GET['seq_id']) { ?>
                             <a id="send-lib" data-selected-ids="" class="btn btn-warning disabled" data-toggle="tooltip" title="请先选择需要送测的文库" href="{:U('Seq/add')}" role="button"><span class="glyphicon glyphicon-send"></span> 新建测序</a>
                         <?php } else { ?>
-                            <a id="add-to-seq" data-selected-ids="" class="btn btn-warning disabled" data-toggle="tooltip" title="请先选择需要送测的文库" href="{:U('Seq/append_lib', 'seq_id=' . intval($_GET['seq_id']))}" role="button"><span class="glyphicon glyphicon-plus"></span> 添加到测序</a>
+                            <a id="add-to-seq" data-selected-ids="" class="btn btn-warning disabled" data-toggle="tooltip" title="请先选择需要送测的文库" href="{:U('Seq/add_lib', 'seq_id=' . intval($_GET['seq_id']))}" role="button"><span class="glyphicon glyphicon-plus"></span> 添加到测序</a>
                         <?php } ?>
                         <a class="btn btn-primary" href="{:U('Sample/index')}" role="button"><span class="glyphicon glyphicon-plus"></span> 从样本创建文库</a>
                     </div>

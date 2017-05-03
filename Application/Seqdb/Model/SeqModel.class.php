@@ -16,16 +16,14 @@ class SeqModel extends Model{
 		))->find();
 	}
 
-	public function add_seq($seq_data) {
-		$seq_id = $this->add($seq_data);
-
+	public function add_seq_libs($seq_id, $lib_ids) {
 		$Library = D('Library');
 		$SeqResult = D('SeqResult');
-		$lib_ids = $seq_data['lib_ids'];
 		foreach ($lib_ids as $lib_id) {
 			$seq_result_data = array(
 				'seq_id' => intval($seq_id),
-                'lib_id' => intval($lib_id)
+                'lib_id' => intval($lib_id),
+                'create_time' => time()
 			);
 
 			$SeqResult->add_seq_result($seq_result_data);
@@ -38,6 +36,11 @@ class SeqModel extends Model{
 		// 更新文库数
 
 		$this->update_lib_count($seq_id);
+	}
+
+	public function add_seq($seq_data) {
+		$seq_id = $this->add($seq_data);
+		$this->add_seq_libs($seq_id, $seq_data['lib_ids']);
 
 		return $seq_id;
 	}

@@ -1,0 +1,85 @@
+<include file="Public/header"/>
+    <div class="container">
+        <form  method="post" action="{:U('seqresult/' . $edit_action)}">
+            <input type="hidden" name="id" value="{$seq_result_info['id']}">
+            <input type="hidden" name="return" value="{$_GET['return']}">
+
+            <div class="row page-header">
+                <div class="col-md-12">
+                    <h1>编辑测序结果</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>测序名称: </label>
+                        <a href="{:U('seq/detail', 'sid=' . intval($seq_info['id']))}">{$seq_info['title']}</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>测序文库: </label>
+                        <a href="{:U('library/detail', 'sid=' . intval($lib_info['id']))}">{$lib_info['title']}</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>测序平台: </label>
+                        <input type="text" class="form-control" name="platform" value="{$seq_result_info['platform']}" placeholder="测序平台">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>测序类型: </label>
+                        <input type="text" class="form-control" name="seq_type" value="{$seq_result_info['seq_type']}" placeholder="测序类型">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>送样量: </label>
+                        <input type="text" class="form-control" name="lib_volume" value="{$seq_result_info['lib_volume']}" placeholder="uL">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>公司Qubit2.0质检浓度: </label>
+                        <input type="text" class="form-control" name="conc_qubit" value="{$seq_result_info['conc_qubit']}" placeholder="ng/uL">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>公司qPCR质检浓度: </label>
+                        <input type="text" class="form-control" name="conc_qpcr" value="{$seq_result_info['conc_qpcr']}" placeholder="nM">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>公司2100测得峰值: </label>
+                        <input type="text" class="form-control" name="peak" value="{$seq_result_info['peak']}"  placeholder="bp"> 
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>备注: </label>
+                        <textarea type="text" class="form-control" name="comment" placeholder="测序备注信息">{$seq_result_info['comment']}</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">提交测序结果</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <include file="Public/pageFooter" />
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+    <script src="__JS__/time-format.js"></script>
+    </body>
+</html>
