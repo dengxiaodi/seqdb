@@ -1,0 +1,65 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row detail-info">
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3>测序结果：</h3>
+                        <div class="panel-actions">
+                            <!-- <a class="btn btn-sm btn-primary" href="{:U('seqresult/update', 'sid=' . intval($seq_result_info['id']) . '&return=' . CURRENT_URL)}" role="button"><span class="glyphicon glyphicon-pencil"></span> 编辑测序结果</a> -->
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-4 detail-item">
+                            <dt>测序名称</dt>
+                            <dd><a href="{:U('seq/detail', 'sid=' . intval($seq_info['id']))}">{$seq_info['title']}</a></dd>
+                        </div>
+
+                        <div class="col-md-4 detail-item">
+                            <dt>测序文库</dt>
+                            <dd><a href="{:U('library/detail', 'sid=' . intval($lib_info['id']))}">{$lib_info['title']}</a></dd>
+                        </div>
+
+                        <div class="col-md-4 detail-item">
+                            <dt>测序平台</dt>
+                            <dd>{$seq_result_info['platform']}</dd>
+                        </div>
+
+                        <div class="col-md-4 detail-item">
+                            <dt>测序类型</dt>
+                            <dd>{$seq_result_info['seq_type']}</dd>
+                        </div>
+
+                        <div class="col-md-4 detail-item">
+                            <dt>送样量</dt>
+                            <dd>{$seq_result_info['lib_volume']} uL</dd>
+                        </div>
+
+                        <div class="col-md-4 detail-item">
+                            <dt>公司Qubit2.0质检浓度</dt>
+                            <dd>{$seq_result_info['conc_qubit']} ng/uL</dd>
+                        </div>
+                        <div class="col-md-4 detail-item">
+                            <dt>公司qPCR质检浓度</dt>
+                            <dd>{$seq_result_info['conc_qpcr']} nM</dd>
+                        </div>
+                        <div class="col-md-4 detail-item">
+                            <dt>公司2100测得峰值</dt>
+                            <dd>{$seq_result_info['peak']} bp</dd>
+                        </div>
+                        
+                        <div class="col-md-4 detail-item">
+                            <dt>备注信息</dt>
+                            <dd>{$seq_result_info['comment']}</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/seq.js"></script>
+    </body>
+</html>

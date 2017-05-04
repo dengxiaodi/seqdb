@@ -33,7 +33,7 @@ class SeqController extends AdminController {
             'send_date' => strtotime($_POST['send_date']),
             'operator' => UID,
             'create_time' => time(),
-            'update_time' => 0,
+            'update_time' => time(),
             'comment' => $_POST['comment']
         );
     }

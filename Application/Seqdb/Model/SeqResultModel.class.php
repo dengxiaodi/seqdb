@@ -71,4 +71,15 @@ class SeqResultModel extends Model{
 			'id' => intval($seq_result_id)
 		))->save($seq_result_data);
 	}
+
+	public function update_seq_data_count($seq_result_id) {
+		$SeqData = D('SeqData');
+		$seq_data_count = $SeqData->seq_data_count($seq_result_id);
+
+		return $this->where(array(
+			'id' => intval($seq_result_id)
+		))->save(array(
+			'data_count' => intval($seq_data_count)
+		));
+	}
 }

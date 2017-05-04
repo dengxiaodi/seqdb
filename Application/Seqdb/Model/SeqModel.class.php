@@ -23,7 +23,8 @@ class SeqModel extends Model{
 			$seq_result_data = array(
 				'seq_id' => intval($seq_id),
                 'lib_id' => intval($lib_id),
-                'create_time' => time()
+                'create_time' => time(),
+                'update_time' => time()
 			);
 
 			$SeqResult->add_seq_result($seq_result_data);

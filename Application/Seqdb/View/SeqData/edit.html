@@ -1,0 +1,115 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row page-header">
+            <div class="col-md-12">
+                <h1>编辑测序数据</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form  method="post" action="__URL__/{$edit_action}">
+                    <input type="hidden" name="seq_result_id" value="{$seq_result_info['id']}">
+                    <input type="hidden" name="return" value="{$_GET['return']}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>测序名称: </label>
+                                <a href="{:U('seq/detail', 'sid=' . intval($seq_info['id']))}">{$seq_info['title']}</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>测序文库: </label>
+                                <a href="{:U('library/detail', 'sid=' . intval($lib_info['id']))}">{$lib_info['title']}</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>数据类型：</label>
+                                <select name="data_type" id="data-type" class="form-control form-inline-block">
+                                    <option value="single" <?php if($seq_data_info['data_type'] == 'single') {　?>selected<?php } ?>>单端</option>
+                                    <option value="pair"<?php if($seq_data_info['data_type'] == 'pair') {　?>selected<?php } ?>>双端</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Clean Data文件路径: <small class="c-gray">格式：机器:raw data `PWD`路径/文件名，例如WS01:/home/xdd/seq/data/Seq_R1.gz，必须rsync可获取</small></label>
+                                <input type="hidden" class="form-control" name="clean_data">
+                                <input id="clean-data-r1" name="clean_data_r1" type="text" class="form-control m-b-10" placeholder="R1" value="{$seq_data_info['clean_data_r1']}">
+                                <input id="clean-data-r2" name="clean_data_r2" type="text" class="form-control" placeholder="R2" value="{$seq_data_info['clean_data_r2']}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Raw Data文件路径: <small class="c-gray">格式：机器:raw data `PWD`路径/文件名，例如WS01:/home/xdd/seq/data/Seq_R1.gz，必须rsync可获取</small></label>
+                                <input type="hidden" class="form-control" name="raw_data">
+                                <input id="raw-data-r1" name="raw_data_r1" type="text" class="form-control m-b-10" placeholder="R1" value="{$seq_data_info['raw_data_r1']}">
+                                <input id="raw-data-r2" name="raw_data_r2" type="text" class="form-control" placeholder="R2" value="{$seq_data_info['raw_data_r2']}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>数据备注: </label>
+                                <textarea class="form-control" name="comment"  placeholder="备注">{$seq_data_info['comment']}</textarea>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                    <div class="row">
+                         <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">提交数据</button>
+                         </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <include file="Public/pageFooter" />
+    
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+    <script src="__JS__/time-format.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            function toggleR2(show) {
+                var $rawDataR2 = $('#raw-data-r2');
+                var $cleanDataR2 = $('#clean-data-r2');
+
+                $rawDataR2.toggle(show);
+                $cleanDataR2.toggle(show);
+            }
+
+            function dataTypeChanged() {
+                var $dataType = $('#data-type');
+
+                switch($dataType.val().trim()) {
+                    case 'pair' :
+                        toggleR2(true);
+                    break;
+                    case 'single' :
+                        toggleR2(false);
+                    break;
+                }
+            }
+
+            $('#data-type').on('change', function() {
+                dataTypeChanged();
+            })
+
+            // 合并R1和R2数据文件
+
+
+
+            // 初始化R2状态
+
+            dataTypeChanged();
+        })
+    </script>
+
+    </body>
+</html>

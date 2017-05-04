@@ -26,6 +26,22 @@ class SeqresultController extends AdminController {
     	);
     }
 
+    public function detail() {
+    	$SeqResult = D('SeqResult');
+    	$seq_result_info = $SeqResult->seq_result_info(I('sid'));
+
+    	$Seq = D('Seq');
+    	$Library = D('Library');
+
+    	$seq_info = $Seq->seq_info($seq_result_info['seq_id']);
+    	$lib_info = $Library->library_info($seq_result_info['lib_id']);
+
+    	$this->assign('seq_result_info', $seq_result_info);
+    	$this->assign('seq_info', $seq_info);
+    	$this->assign('lib_info', $lib_info);
+    	$this->display('detail');
+    }
+
     public function update_seq_result() {
     	$SeqResult = D('SeqResult');
     	
