@@ -1,0 +1,107 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row detail-info">
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3>测序数据：编号 {$seq_data_info['data_no']}</h3>
+                        <div class="panel-actions">
+                            <a class="btn btn-sm btn-primary" href="{:U('seqdata/update', 'sid=' . intval($seq_data_info['id']) . '&return=' . CURRENT_URL)}" role="button"><span class="glyphicon glyphicon-pencil"></span> 编辑测序数据</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-4 detail-item">
+                            <dt>样本</dt>
+                            <dd><a href="{:U('sample/detail', 'sid=' . intval($seq_data_info['sample_info']['id']))}"">{$seq_data_info['sample_info']['name']}</a></dd>
+                        </div>
+
+                        <div class="col-md-4 detail-item">
+                            <dt>文库</dt>
+                            <dd><a href="{:U('library/detail', 'sid=' . intval($seq_data_info['library_info']['id']))}"">{$seq_data_info['library_info']['title']}</a></dd>
+                        </div>
+
+                        <div class="col-md-4 detail-item">
+                            <dt>测序</dt>
+                            <dd><a href="{:U('seq/detail', 'sid=' . intval($seq_data_info['seq_info']['id']))}"">{$seq_data_info['seq_info']['title']}</a></dd>
+                        </div>
+
+                        <div class="col-md-4 detail-item">
+                            <dt>数据类型</dt>
+                            <dd>
+                                <?php if($seq_data_info['data_type'] == 'single') { ?>
+                                    单端
+                                <?php } else if($seq_data_info['data_type'] == 'pair') { ?>
+                                    双端
+                                <?php } else { ?>
+                                    其他
+                                <?php } ?>
+                            </dd>
+                        </div>
+
+                        <div class="col-md-8 detail-item">
+                            <dt>备注</dt>
+                            <dd>{$seq_data_info['comment']}</dd>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h4>数据文件：<a href="{:U('seqdata/download', 'sid=' . intval($seq_data_info['id']))}">下载备份数据</a></h4>
+                        </div>
+
+                        <div class="col-md-8 detail-item">
+                            <dt>Raw Data R1</dt>
+                            <dd>
+                                <?php if($seq_data_info['raw_data_r1']) { ?>
+                                    {$seq_data_info['raw_data_r1']}
+                                <?php } else { ?>
+                                    <span class="c-red">无数据</span>
+                                <?php } ?>
+                            </dd>
+                        </div>
+                        
+                        <?php if($seq_data_info['data_type'] == 'pair') { ?>
+                            <div class="col-md-8 detail-item">
+                                <dt>Raw Data R2</dt>
+                                <dd>
+                                    <?php if($seq_data_info['raw_data_r2']) { ?>
+                                        {$seq_data_info['raw_data_r2']}
+                                    <?php } else { ?>
+                                        <span class="c-red">无数据</span>
+                                    <?php } ?>
+                                </dd>
+                            </div>
+                        <?php } ?>
+
+                        <div class="col-md-8 detail-item">
+                            <dt>Clean Data R1</dt>
+                            <dd>
+                                <?php if($seq_data_info['clean_data_r1']) { ?>
+                                    {$seq_data_info['clean_data_r1']}
+                                <?php } else { ?>
+                                    <span class="c-red">无数据</span>
+                                <?php } ?>
+                            </dd>
+                        </div>
+                        
+                        <?php if($seq_data_info['data_type'] == 'pair') { ?>
+                            <div class="col-md-8 detail-item">
+                                <dt>Clean Data R2</dt>
+                                <dd>
+                                    <?php if($seq_data_info['clean_data_r2']) { ?>
+                                        {$seq_data_info['clean_data_r2']}
+                                    <?php } else { ?>
+                                        <span class="c-red">无数据</span>
+                                    <?php } ?>
+                                </dd>
+                            </div>
+                        <?php } ?>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/seq.js"></script>
+    </body>
+</html>

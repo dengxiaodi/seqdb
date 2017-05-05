@@ -1,0 +1,122 @@
+<include file="Public/header"/>
+        <div class="container">
+            <div class="row page-header">
+                <div class="col-md-12">
+                    <h1>测序数据</h1>
+                    
+                    <!-- <div class="header-actions">
+                        <a class="btn btn-primary" href="__URL__/add" role="button"><span class="glyphicon glyphicon-plus"></span> 创建样本</a>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>数据编号</th>
+                                <th>样本</th>
+                                <th>文库</th>
+                                <th>测序</th>
+                                <th>数据类型</th>
+                                <th>添加时间</th>
+                                <th>备注</th>
+                                <th>备份状态</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <foreach name="seq_data_list" item="obj">
+                                <tr>
+                                    <td>
+                                        <a href="{:U('seqdata/detail', 'sid=' . intval($obj['id']))}"">{$obj['data_no']}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{:U('sample/detail', 'sid=' . intval($obj['sample_info']['id']))}">{$obj['sample_info']['name']}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{:U('library/detail', 'sid=' . intval($obj['library_info']['id']))}">{$obj['library_info']['title']}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{:U('seq/detail', 'sid=' . intval($obj['seq_info']['id']))}">{$obj['seq_info']['title']}</a>
+                                    </td>
+                                    <!-- <td>
+                                        <?php if($obj['raw_data_r1']) { ?>
+                                            <a href="{:U('seqdata/download', 'sid=' . intval($obj['id']))}">下载</a>
+                                        <?php } else { ?>
+                                            <span class="c-red">
+                                                无数据
+                                            </span>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?php if($obj['clean_data_r1']) { ?>
+                                            <a href="{:U('seqdata/download', 'sid=' . intval($obj['id']))}">下载</a>
+                                        <?php } else { ?>
+                                            <span class="c-red">
+                                                无数据
+                                            </span>
+                                        <?php } ?>
+                                    </td> -->
+                                    <td>
+                                        <?php if($obj['data_type'] == 'single') { ?>
+                                            单端
+                                        <?php } else if($obj['data_type'] == 'pair') { ?>
+                                            双端
+                                        <?php } else { ?>
+                                            其他
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        {:time_format($obj['create_time'],"Y-m-d")}
+                                    </td>
+                                    <td>
+                                        {$obj['comment']}
+                                    </td>
+                                    <td>
+                                        <span class="c-red">未备份</span>
+                                    </td>
+                                    <td>
+                                        <a href="{:U('seqdata/download', 'sid=' . intval($obj['id']))}">下载</a> | <a href="{:U('seqdata/update', 'sid=' . intval($obj['id']). '&return=' . CURRENT_URL)}">编辑</a> | <a class="remove-data" href="{:U('seqdata/del', 'sid=' . intval($obj['id']) . '&return=' . CURRENT_URL)}">删除</a>
+                                    </td>
+                                </tr>
+                            </foreach>
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        
+        <include file="Public/pageFooter" />
+        <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+        <script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+                $('#datatable').DataTable({
+                    "order":[[5,"desc"]],
+                });
+
+                $('body').on('click', '.remove-data', function(e){
+                    var $this = $(this);
+                    e.preventDefault();
+
+                    swal({
+                        title: '删除数据',
+                        text: "确认删除数据？",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#9f9f9f',
+                        confirmButtonText: '确定删除',
+                        cancelButtonText: '取消'
+                    }).then(function () {
+                        window.location.href = $this.attr('href');
+                    }).catch(swal.noop);
+                });
+            });
+        </script>
+    </body>
+</html>

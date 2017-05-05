@@ -6,9 +6,15 @@ use Think\Model;
 class LibraryModel extends Model{
 	protected $tableName = 'library';
 
-	public function library_list() {
-		$library_list = $this->order('id desc')->select();
-
+	public function library_list($sample_id) {
+		if($sample_id) {
+			$library_list = $this->where(array(
+				'sample_id' => intval($sample_id)
+			))->order('id desc')->select();
+		} else {
+			$library_list = $this->order('id desc')->select();
+		}
+		
 		$Sample = D('Sample');
 		foreach ($library_list as $key => $value) {
 			$library_list[$key]['sample_info'] = $Sample->sample_info($value['sample_id']);
@@ -32,7 +38,11 @@ class LibraryModel extends Model{
 	}
 
 	public function add_library($library_data) {
-		return $this->add($library_data);
+		$lib_id = $this->add($library_data);
+		$Sample = D('Sample');
+		$Sample->update_library_count($library_data['sample_id']);
+
+		return $lib_id;
 	}
 
 	public function update_library($library_id, $library_data) {
@@ -54,6 +64,9 @@ class LibraryModel extends Model{
 	}
 
 	public function delete_library($lib_id) {
+
+		$library_info = $this->library_info($lib_id);
+
 		// 删除测序数据表中的相关数据
 
 		// 删除数据表中的相关数据
@@ -61,5 +74,14 @@ class LibraryModel extends Model{
         $this->where(array(
         	'id' => intval($lib_id)
         ))->delete();
+
+        $Sample = D('Sample');
+        $Sample->update_library_count($library_info['sample_id']);
+	}
+
+	public function library_count($sample_id) {
+		return $this->where(array(
+			'sample_id' => intval($sample_id)
+		))->count();
 	}
 }

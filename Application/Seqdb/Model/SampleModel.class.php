@@ -26,6 +26,17 @@ class SampleModel extends Model{
 		))->save($sample_data);
 	}
 
+	public function update_library_count($sample_id) {
+		$Library = D('Library');
+		$lib_count = $Library->library_count($sample_id);
+
+		$this->where(array(
+			'id' => intval($sample_id)
+		))->save(array(
+			'lib_count' => $lib_count
+		));
+	}
+
 	public function delete_sample($sample_id) {
         $this->where(array(
         	'id' => intval($sample_id)

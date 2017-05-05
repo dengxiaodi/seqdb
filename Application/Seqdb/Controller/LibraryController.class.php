@@ -25,7 +25,7 @@ class LibraryController extends AdminController {
 
     public function index(){
         $Library = D('Library');
-        $library_list = $Library->library_list();
+        $library_list = $Library->library_list(I('sid'));
 
         $this->assign('uid', UID);
         $this->assign('library_list', $library_list);

@@ -9,19 +9,20 @@
         <div class="row">
             <div class="col-md-12">
                 <form  method="post" action="__URL__/{$edit_action}">
-                    <input type="hidden" name="seq_result_id" value="{$seq_result_info['id']}">
+                    <input type="hidden" name="seq_result_id" value="{$seq_data_info['seq_result_info']['id']}">
+                    <input type="hidden" name="id" value="{$seq_data_info['id']}">
                     <input type="hidden" name="return" value="{$_GET['return']}">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>测序名称: </label>
-                                <a href="{:U('seq/detail', 'sid=' . intval($seq_info['id']))}">{$seq_info['title']}</a>
+                                <a href="{:U('seq/detail', 'sid=' . intval($seq_data_info['seq_info']['id']))}">{$seq_data_info['seq_info']['title']}</a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>测序文库: </label>
-                                <a href="{:U('library/detail', 'sid=' . intval($lib_info['id']))}">{$lib_info['title']}</a>
+                                <a href="{:U('library/detail', 'sid=' . intval($seq_data_info['library_info']['id']))}">{$seq_data_info['library_info']['title']}</a>
                             </div>
                         </div>
                         <div class="col-md-12">

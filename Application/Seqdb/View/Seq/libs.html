@@ -25,7 +25,7 @@
                 </td>
                 <td class="text-center">
                     <?php if($obj['data_count'] > 0) { ?>
-                        <a href="#">查看数据({$obj['data_count']})</a>
+                        <a href="{:U('seqdata/index', 'rid=' . intval($obj['id']))}">查看数据({$obj['data_count']})</a>
                     <?php } else { ?>
                         <span class="c-red">无数据</span>
                     <?php } ?>
