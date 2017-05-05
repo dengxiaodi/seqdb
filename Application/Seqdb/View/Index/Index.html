@@ -1,123 +1,104 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
-
-    <title>{:C('WEB_SITE_TITLE')}</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="__CSS__/jumbotron.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="__JS__/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="__JS__/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="__JS__/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">SeqDB</a>
-        </div>
-
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{:U('Sample/index')}">样本管理</a></li>
-                <li><a href="{:U('library/index')}">文库管理</a></li>
-                <li><a href="{:U('seq/index')}">送样管理</a></li>
-                <li><a href="{:U('data/index')}">数据管理</a></li>
-                <if condition="is_administrator()">
-                  <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{:U('Sys/index')}">用户管理</a></li>
-                            <li><a href="{:U('Sys/index')}">日志管理</a></li>
-                        </ul>
-                    </li>
-                </if>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <if condition="is_login()">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Hello {:get_nickname(is_login())} !<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">修改密码</a></li>
-                            <li><a href="{:U('Index/logout')}">退出系统</a></li>
-                        </ul>
-                    </li>
-                <else/>
-                    <div class="navbar-form navbar-right">
-                        <a href="{:U('public/login')}" class="btn btn-success" role="button">Login</a>
-                    </div>
-                </if>
-            </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-
+<include file="Public/header"/>
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      
+    <div class="jumbotron home-jumbotron">
       <div class="container">
         <h1>SeqDB</h1>
-        <p>SeqDB是一个二代测序数据管理系统，可以管理数据相关的样品、文库、送样等相关信息。提供可视化的管理系统。</p>
-        <p><a class="btn btn-primary btn-lg" href="{:U('Sample/index')}" role="button">管理数据 &raquo;</a></p>
+        <p>二代测序实验流程管理解决方案。轻松管理测序流程中的样品、文库、送样、数据等各种信息。</p>
       </div>
-
     </div>
-
-
+    
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <div class="col-md-3">
+          <div class="stats-item">
+            <div class="stats-item-header bgm-red">
+                <h2>样本管理</h2>
+                <p>管理样本基本信息</p>
+            </div>
+            <div class="stats-item-body">
+                <div class="chart" data-bar-color="#f44336" data-percent="100">
+                        <div class="count-item">
+                            <div class="count">{$sample_count}</div>
+                            <div class="title">个样本</div>
+                        </div>
+                    </div>
+            </div>
+            <div class="stats-item-footer">
+                <p><a class="btn btn-default btn-lg" href="{:U('Sample/index')}" role="button">管理样本</a></p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <div class="col-md-3">
+            <div class="stats-item">
+                <div class="stats-item-header bgm-green">
+                    <h2>文库管理</h2>
+                    <p>管理建库信息</p>
+                </div>
+                <div class="stats-item-body">
+                    <div class="chart" data-bar-color="#4CAF50" data-percent="100">
+                        <div class="count-item">
+                            <div class="count">{$library_count}</div>
+                            <div class="title">个文库</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-item-footer">
+                    <p><a class="btn btn-default btn-lg" href="{:U('Library/index')}" role="button">管理文库</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-item">
+                <div class="stats-item-header bgm-blue">
+                    <h2>测序管理</h2>
+                    <p>管理和追踪测序送样流程及结果</p>
+                </div>
+                <div class="stats-item-body">
+                    <div class="chart" data-bar-color="#2196F3" data-percent="100">
+                        <div class="count-item">
+                            <div class="count">{$seq_count}</div>
+                            <div class="title">次测序</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-item-footer">
+                    <p><a class="btn btn-default btn-lg" href="{:U('Seq/index')}" role="button">测序送测</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-item">
+                <div class="stats-item-header bgm-orange">
+                    <h2>数据管理</h2>
+                    <p>管理测序数据</p>
+                </div>
+                <div class="stats-item-body">
+                    <div class="chart" data-bar-color="#FF9800" data-percent="100">
+                        <div class="count-item">
+                            <div class="count">{$seqdata_count}</div>
+                            <div class="title">条数据</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-item-footer">
+                    <p><a class="btn btn-default btn-lg" href="{:U('SeqData/index')}" role="button">数据下载</a></p>
+                </div>
+            </div>
         </div>
       </div>
-
-      <hr>
-
-      <footer>
-        <p>&copy; Company 2014</p>
-      </footer>
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="__JS__/jquery/1.11.3/jquery.min.js"></script>
-    <script src="__JS__/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    </div>
+    
+    <include file="Public/pageFooter" />
     <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('.chart').easyPieChart({
+                'size': 150,
+                'barColor': $(this).attr('data-bar-color')
+            });
+        });
+    </script>
   </body>
 </html>
