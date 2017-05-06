@@ -35,6 +35,14 @@ img {
     margin-bottom: 10px;
     height: 448px;
 }
+
+.login-main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .login-body .pr {
     position: relative;
     height: 448px;
@@ -45,7 +53,8 @@ img {
     padding: 25px 30px 13px;
     background-color: #fff;
     box-shadow: 0 0 26px #041A36;
-    border-top: 8px solid #42EC00;
+    /*border-top: 8px solid #42EC00;*/
+    border-radius: 6px;
 }
 .login-form h3 {
     font-size: 26px;
@@ -55,7 +64,7 @@ img {
     line-height: 44px;
     text-align: center;
     color: #8D9CAA;
-    *line-height: 50px;
+    line-height: 50px;
 }
 .login-logo {
     display: inline-block;
@@ -63,7 +72,7 @@ img {
     width: 30px;
     height: 44px;
     vertical-align: top;
-    background: url(../images/login_logo.png) no-repeat 0 0 ;
+    /*background: url(../images/login_logo.png) no-repeat 0 0 ;*/
 }
 .login-form .check-tips {
     color: #ff0000;
@@ -162,10 +171,10 @@ img {
     vertical-align: middle;
     cursor: pointer;
     border: 0;
-    background-color: #40C402;
+    background-color: #3F51B5;
 }
 .login-form .login-btn:hover {
-    background-color: #42EC00;
+    background-color: #3F51B5;
 }
 .login-form .login-btn[disabled] {
     opacity: 0.6;
@@ -227,7 +236,7 @@ input:-webkit-autofill {
 .logo-img {
     margin: -20px 0 9px 0;;
     height: 49px;
-    background: url(../images/logo.png) no-repeat 0 center;
+    /*background: url(../images/logo.png) no-repeat 0 center;*/
 }
 
 .welcome{

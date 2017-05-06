@@ -1,0 +1,83 @@
+<include file="Public/header"/>
+
+    <div class="container">
+        <div class="row detail-info">
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3>下载数据：编号 {$seq_data_info['data_no']}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-8 detail-item">
+                            <dt>Clean Data下载地址</dt>
+                            <dd class="m-b-15">
+                                <span>本地地址：</span>
+                                <?php if($seq_data_info['clean_localpath']) { ?>
+                                    {$seq_data_info['clean_localpath']}
+                                <?php } else { ?>
+                                    <span class="c-red">
+                                        <?php if($seq_data_info['clean_data_r1']) { ?>
+                                            数据未完成本地备份
+                                        <?php } else { ?>
+                                            未添加Clean Data信息，请联系相关人完善数据信息
+                                        <?php } ?>
+                                    </span>
+                                <?php } ?>
+                            </dd>
+                            <dd>
+                                <span>云端地址：</span>
+                                <?php if($seq_data_info['raw_cloudpath']) { ?>
+                                    {$seq_data_info['raw_cloudpath']}
+                                <?php } else { ?>
+                                    <span class="c-red">
+                                        <?php if($seq_data_info['clean_data_r1']) { ?>
+                                            数据未完成云端备份
+                                        <?php } else { ?>
+                                            未添加Clean Data信息，请联系相关人完善数据信息
+                                        <?php } ?>
+                                    </span>
+                                <?php } ?>
+                            </dd>
+                        </div> 
+
+                        <div class="col-md-8 detail-item">
+                            <dt>Raw Data下载地址</dt>
+                            <dd class="m-b-15">
+                                <span>本地地址：</span>
+                                <?php if($seq_data_info['raw_localpath']) { ?>
+                                    {$seq_data_info['raw_localpath']}
+                                <?php } else { ?>
+                                    <span class="c-red">
+                                        <?php if($seq_data_info['raw_data_r1']) { ?>
+                                            数据未完成本地备份
+                                        <?php } else { ?>
+                                            未添加Raw Data信息，请联系相关人完善数据信息
+                                        <?php } ?>
+                                    </span>
+                                <?php } ?>
+                            </dd>
+                            <dd>
+                                <span>云端地址：</span>
+                                <?php if($seq_data_info['raw_cloudpath']) { ?>
+                                    {$seq_data_info['raw_cloudpath']}
+                                <?php } else { ?>
+                                    <span class="c-red">
+                                        <?php if($seq_data_info['raw_data_r1']) { ?>
+                                            数据未完成云端备份
+                                        <?php } else { ?>
+                                            未添加Raw Data信息，请联系相关人完善数据信息
+                                        <?php } ?>
+                                    </span>
+                                <?php } ?>
+                            </dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+    <script src="__JS__/seq.js"></script>
+    </body>
+</html>

@@ -16,4 +16,13 @@ $(document).ready(function() {
             window.location.href = $this.attr('href');
         }).catch(swal.noop);
     });
+
+    $('.upload-report').on('click', function(e) {
+        e.preventDefault();
+        $('#report-upload').click();
+    });
+
+    $('#report-upload').on('change', function(e) {
+        $('#report-upload-form').submit();
+    })
 })

@@ -38,8 +38,8 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    
                     <?php if($seq_info) { ?>
+                        <include file="Seq/reports" />
                         <include file="Seq/libs" />
                     <?php } else { ?>
                         <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">

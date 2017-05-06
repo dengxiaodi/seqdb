@@ -62,6 +62,16 @@ class SeqModel extends Model{
         ));
 	}
 
+	public function update_report_count($seq_id) {
+		$SeqReport = D('SeqReport');
+
+		$this->where(array(
+			'id' => intval($seq_id)
+		))->save(array(
+			'report_count' => $SeqReport->report_count($seq_id)
+		));
+	}
+
 	public function delete_seq($seq_id) {
 		$SeqResult = D('SeqResult');
 		$seq_lib_ids = $SeqResult->seq_lib_ids($seq_id);

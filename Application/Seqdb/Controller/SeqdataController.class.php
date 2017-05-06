@@ -68,6 +68,14 @@ class SeqdataController extends AdminController {
         $this->display('detail');
     }
 
+    public function download() {
+        $SeqData = D('SeqData');
+        $seq_data_info = $SeqData->detailed_seq_data_info(I('sid'));
+
+        $this->assign('seq_data_info', $seq_data_info);
+        $this->display('download');
+    }
+
     public function update_seq_data() {
         $SeqData = D('SeqData');
         $seq_data = $this->process_seq_data();

@@ -1,0 +1,33 @@
+<h3 class="m-b-25">
+	测序报告 （共 {$seq_info['report_count']} 个文件）
+	<form class="hidden" method='post' id="report-upload-form" action="{:U('seqreport/upload')}" enctype="multipart/form-data">
+		<input id="report-upload" type='file' name='report'>
+		<input type="hidden" name="seq_id" value="{$seq_info['id']}">
+        <input type="hidden" name="return" value="{CURRENT_URL}">
+	</form>
+	<a href="javascript:void(0);" class="btn btn-sm btn-success pull-right upload-report">
+		<span class="glyphicon glyphicon-upload"></span> 上传报告
+	</a>
+</h3>
+
+<table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>文件名称</th>
+            <th class="text-center">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <foreach name="seq_reports" item="obj">
+            <tr>
+                <td>
+                   abc 
+                </td>
+                
+                <td class="text-center">
+                	<a href="{:U('seqreport/del')}">下载</a> | <a class="remove-seqresult" href="{:U('seqreport/del', 'sid=' . intval($obj['id']) . '&return=' . CURRENT_URL)}">删除</a>
+                </td>
+            </tr>
+        </foreach>
+    </tbody>
+</table>

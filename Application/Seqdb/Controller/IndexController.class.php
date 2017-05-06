@@ -30,7 +30,7 @@ class IndexController extends Controller {
     public function logout(){
         if(is_login()){
             D('Member')->logout();
-            $this->success('退出成功！', U('Index'));
+            $this->redirect('index');
         } else {
             $this->redirect('index');
         }
