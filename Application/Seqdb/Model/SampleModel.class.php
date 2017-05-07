@@ -25,7 +25,7 @@ class SampleModel extends Model{
 			'id' => intval($sample_id)
 		))->save($sample_data);
 	}
-
+	
 	public function update_library_count($sample_id) {
 		$Library = D('Library');
 		$lib_count = $Library->library_count($sample_id);
@@ -38,6 +38,13 @@ class SampleModel extends Model{
 	}
 
 	public function delete_sample($sample_id) {
+		$Library = D('Library');
+
+		$libs = $Library->libs_by_sample_id($sample_id);
+		foreach ($libs as $lib) {
+			$Library->delete_library($lib['id']);
+		}
+
         $this->where(array(
         	'id' => intval($sample_id)
         ))->delete();

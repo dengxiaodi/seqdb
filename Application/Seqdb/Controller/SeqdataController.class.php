@@ -38,7 +38,8 @@ class SeqdataController extends AdminController {
         $SeqResult->update_seq_data_count($seq_data['seq_result_id']);
 
         action_log('add_seq_data', 'seq_data', UID, UID);
-        $this->redirect(urlsafe_b64decode($_POST['return']));
+        $this->redirect('seq/update?sid=' . $_POST['seq_id']);
+        // $this->redirect(urlsafe_b64decode($_POST['return']));
     }
 
     public function add(){

@@ -9,7 +9,8 @@ class SeqresultController extends AdminController {
         $SeqResult->delete_seq_result(I('sid'));
 
         action_log('delete_seq_result','seq', UID, UID);
-        $this->redirect(urlsafe_b64decode($_GET['return']));
+        $this->redirect('seq/update?sid=' . I('seq_id'));
+        // $this->redirect(urlsafe_b64decode($_GET['return']));
     }
 
     public function process_seq_result_data() {
@@ -49,7 +50,8 @@ class SeqresultController extends AdminController {
     	$seq_result_data = $this->process_seq_result_data();
 
     	$SeqResult->update_seq_result($seq_result_id, $seq_result_data);
-    	$this->redirect(urlsafe_b64decode($_POST['return']));
+        $this->redirect('seq/update?sid=' . $_POST['seq_id']);
+    	// $this->redirect(urlsafe_b64decode($_POST['return']));
     }
 
     public function update() {

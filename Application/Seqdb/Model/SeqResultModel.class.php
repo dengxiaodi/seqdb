@@ -46,11 +46,20 @@ class SeqResultModel extends Model{
 		return $this->where('seq_id=' . intval($seq_id))->count();
 	}
 
-	public function delete_seq_result($seq_result_id) {
-		// 删除数据记录
+	public function seq_results_by_lib_id($lib_id) {
+		return $this->where(array(
+			'lib_id' => intval($lib_id)
+		))->select();
+	}
 
+	public function delete_seq_result($seq_result_id) {
 		$seq_result_info = $this->seq_result_info($seq_result_id);
 
+		// 删除数据记录
+
+		$SeqData = D('SeqData');
+		$SeqData->delete_seq_data_by_result_id($seq_result_info['id']);
+		
 		// 删除测序结果记录
 
 		$this->where(array(

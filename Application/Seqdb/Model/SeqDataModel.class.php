@@ -24,7 +24,7 @@ class SeqDataModel extends Model{
 		$seq_info = $Seq->seq_info($seq_result_info['seq_id']);
 		$library_info = $Library->library_info($seq_result_info['lib_id']);
 		$sample_info = $Sample->sample_info($library_info['sample_id']);
-
+		
 		$seq_data_info['sample_info'] = $sample_info;
 		$seq_data_info['library_info'] = $library_info;
 		$seq_data_info['seq_result_info'] = $seq_result_info;
@@ -105,5 +105,13 @@ class SeqDataModel extends Model{
 
         $SeqResult = D('SeqResult');
         $SeqResult->update_seq_data_count($seq_data_info['seq_result_id']);
+	}
+
+	public function delete_seq_data_by_result_id($seq_result_id) {
+		$seq_data_list = $this->list_seq_data($seq_result_id);
+
+		foreach ($seq_data_list as $key => $value) {
+			$this->delete_seq_data($value['id']);
+		}
 	}
 }

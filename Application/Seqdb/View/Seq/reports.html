@@ -3,11 +3,12 @@
 	<form class="hidden" method='post' id="report-upload-form" action="{:U('seqreport/upload')}" enctype="multipart/form-data">
 		<input id="report-upload" type='file' name='report'>
 		<input type="hidden" name="seq_id" value="{$seq_info['id']}">
-        <input type="hidden" name="return" value="{CURRENT_URL}">
 	</form>
-	<a href="javascript:void(0);" class="btn btn-sm btn-success pull-right upload-report">
-		<span class="glyphicon glyphicon-upload"></span> 上传报告
-	</a>
+	<?php if($editable) { ?>
+		<a href="javascript:void(0);" class="btn btn-sm btn-success pull-right upload-report">
+			<span class="glyphicon glyphicon-upload"></span> 上传报告
+		</a>
+	<?php } ?>
 </h3>
 
 <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
@@ -18,16 +19,19 @@
         </tr>
     </thead>
     <tbody>
-        <foreach name="seq_reports" item="obj">
+        <?php foreach($seq_info['seq_reports'] as $seq_report) { ?>
             <tr>
                 <td>
-                   abc 
+                	{$seq_report['filename']}
                 </td>
                 
                 <td class="text-center">
-                	<a href="{:U('seqreport/del')}">下载</a> | <a class="remove-seqresult" href="{:U('seqreport/del', 'sid=' . intval($obj['id']) . '&return=' . CURRENT_URL)}">删除</a>
+                	<a href="{:U('seqreport/download', 'id=' . intval($seq_report['id']))}">下载</a>
+					<?php if($editable) { ?>
+                	 | <a class="remove-seqreport" href="{:U('seqreport/del', 'sid=' . intval($seq_report['id']) . '&seq_id=' . intval($seq_info['id']))}">删除</a>
+                	<?php } ?>
                 </td>
             </tr>
-        </foreach>
+        <?php } ?>
     </tbody>
 </table>

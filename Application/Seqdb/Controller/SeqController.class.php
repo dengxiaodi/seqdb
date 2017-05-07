@@ -13,7 +13,6 @@ class SeqController extends AdminController {
 
     public function add_seq() {
         $seq_data = $this->process_seq_data();
-
         if(!$seq_data['lib_ids']) {
             $this->error("创建送测失败：请选择至少一个文库");
         }
@@ -49,6 +48,7 @@ class SeqController extends AdminController {
 
         $this->assign('libs', $libs);
         $this->assign('edit_action', 'add_seq');
+        $this->assign('editable', true);
         $this->display('edit');
     }
 
@@ -69,7 +69,7 @@ class SeqController extends AdminController {
         $Seq = D('Seq');
         $Seq->add_seq_libs($seq_id, $lib_ids);
 
-        $this->redirect('Seq/detail?sid=' . intval($seq_id));
+        $this->redirect('Seq/update?sid=' . intval($seq_id));
     }
 
     public function del(){
@@ -92,14 +92,11 @@ class SeqController extends AdminController {
         $seq_id = I('sid');
 
         $Seq = D('Seq');
-        $seq_info = $Seq->seq_info($seq_id);
-
-        $SeqResult = D('SeqResult');
-        $seq_results = $SeqResult->seq_results($seq_id);
+        $seq_info = $Seq->detailed_seq_info($seq_id);
 
         $this->assign('seq_info', $seq_info);
-        $this->assign('seq_results', $seq_results);
         $this->assign('edit_action', 'update_seq');
+        $this->assign('editable', true);
         $this->display('edit');
     }
 
@@ -107,13 +104,9 @@ class SeqController extends AdminController {
         $seq_id = I('sid');
 
         $Seq = D('Seq');
-        $seq_info = $Seq->seq_info($seq_id);
-        
-        $SeqResult = D('SeqResult');
-        $seq_results = $SeqResult->seq_results($seq_id);
+        $seq_info = $Seq->detailed_seq_info($seq_id);
 
         $this->assign('seq_info', $seq_info);
-        $this->assign('seq_results',$seq_results);
         $this->assign('uid', UID);
         $this->display('detail');
     }

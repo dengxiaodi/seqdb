@@ -16,6 +16,20 @@ class SeqModel extends Model{
 		))->find();
 	}
 
+	public function detailed_seq_info($seq_id) {
+		$seq_info = $this->where(array(
+			'id' => intval($seq_id)
+		))->find();
+
+		$SeqResult = D('SeqResult');
+		$seq_info['seq_results'] = $SeqResult->seq_results($seq_id);
+
+		$SeqReport = D('SeqReport');
+		$seq_info['seq_reports'] = $SeqReport->seq_reports($seq_id);
+
+		return $seq_info;
+	}
+
 	public function add_seq_libs($seq_id, $lib_ids) {
 		$Library = D('Library');
 		$SeqResult = D('SeqResult');
@@ -85,6 +99,11 @@ class SeqModel extends Model{
 			$SeqResult->delete_seq_result($seq_result_id);
 		}
 
+		// 删除测序报告记录
+
+		$SeqReport = D('SeqReport');
+		$SeqReport->delete_seq_reports_by_seq_id($seq_id);
+		
 		// 删除测序记录
 
         $this->where(array(

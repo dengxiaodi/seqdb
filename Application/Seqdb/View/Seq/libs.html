@@ -1,4 +1,11 @@
-<h3 class="m-b-25">该批测序共包含 {$seq_info['lib_count']} 个文库 <a href="{:U('library/index', 'seq_id=' . intval($seq_info['id']))}" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> 添加文库</a></h3>
+<h3 class="m-b-25">
+    该批测序共包含 {$seq_info['lib_count']} 个文库 
+    <?php if($editable) { ?>
+        <a href="{:U('library/index', 'seq_id=' . intval($seq_info['id']))}" class="btn btn-sm btn-success pull-right">
+            <span class="glyphicon glyphicon-plus"></span> 添加文库
+        </a>
+    <?php } ?>
+</h3>
 
 <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
     <thead>
@@ -6,35 +13,43 @@
             <th>送测文库</th>
             <th class="text-center">测序结果</th>
             <th class="text-center">测序数据</th>
-            <th class="text-center">操作</th>
+            <?php if($editable) { ?>
+                <th class="text-center">操作</th>
+            <?php } ?>
         </tr>
     </thead>
     <tbody>
-        <foreach name="seq_results" item="obj">
+        <?php foreach($seq_info['seq_results'] as $seq_result) { ?>
             <tr>
                 <td>
-                    <a href="{:U('library/detail', 'sid=' . intval($obj['lib_id']))}">{$obj['library_info']['title']}</a>
+                    <a href="{:U('library/detail', 'sid=' . intval($seq_result['lib_id']))}">{$seq_result['library_info']['title']}</a>
                 </td>
                 <td class="text-center">
-                    <?php if($obj['update_time'] > $obj['create_time']) { ?>
-                        <a href="{:U('seqresult/detail', 'sid=' . intval($obj['id']))}">查看结果</a>
+                    <?php if($seq_result['update_time'] > $seq_result['create_time']) { ?>
+                        <a href="{:U('seqresult/detail', 'sid=' . intval($seq_result['id']))}">查看结果</a>
                     <?php } else { ?>
                         <span class="c-red">未添加</span> 
                     <?php } ?>
-                     | <a href="{:U('seqresult/update', 'sid=' . intval($obj['id']) . '&return=' . CURRENT_URL)}">编辑</a>
+                    <?php if($editable) { ?>
+                     | <a href="{:U('seqresult/update', 'sid=' . intval($seq_result['id']) . '&seq_id=' . intval($seq_info['id']))}">编辑</a>
+                    <?php } ?>
                 </td>
                 <td class="text-center">
-                    <?php if($obj['data_count'] > 0) { ?>
-                        <a href="{:U('seqdata/index', 'rid=' . intval($obj['id']))}">查看数据({$obj['data_count']})</a>
+                    <?php if($seq_result['data_count'] > 0) { ?>
+                        <a href="{:U('seqdata/index', 'rid=' . intval($seq_result['id']))}">查看数据({$seq_result['data_count']})</a>
                     <?php } else { ?>
                         <span class="c-red">无数据</span>
                     <?php } ?>
-                     | <a href="{:U('seqdata/add', 'sid=' . intval($obj['id']) . '&return=' . CURRENT_URL)}">添加数据</a>
+                    <?php if($editable) { ?>
+                     | <a href="{:U('seqdata/add', 'sid=' . intval($seq_result['id']) . '&seq_id=' . intval($seq_info['id']))}">添加数据</a>
+                    <?php } ?>
                 </td>
-                <td class="text-center">
-                    <a class="remove-seqresult" href="{:U('seqresult/del', 'sid=' . intval($obj['id']) . '&return=' . CURRENT_URL)}">删除</a>
-                </td>
+                <?php if($editable) { ?>
+                    <td class="text-center">
+                        <a class="remove-seqresult" href="{:U('seqresult/del', 'sid=' . intval($seq_result['id']) . '&seq_id=' . intval($seq_info['id']))}">删除</a>
+                    </td>
+                <?php } ?>
             </tr>
-        </foreach>
+        <?php } ?>
     </tbody>
 </table>

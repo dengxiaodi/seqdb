@@ -1,6 +1,6 @@
 <include file="Public/header"/>
     <div class="container">
-        <form  method="post" action="__URL__/{$edit_action}">
+        <form  id="seq-form" method="post" action="__URL__/{$edit_action}">
             <input type="hidden" name="id" value="{$seq_info['id']}">
             
             <div class="row page-header">
@@ -36,12 +36,10 @@
                     </div>
                 </div> 
             </div>
+
             <div class="row">
                 <div class="col-md-12">
-                    <?php if($seq_info) { ?>
-                        <include file="Seq/reports" />
-                        <include file="Seq/libs" />
-                    <?php } else { ?>
+                    <?php if(!$seq_info) { ?>
                         <table id="datatable" class="table table-hover table-striped table-bordered " cellspacing="0" width="100%">
                             <thead>
                                 <tr>
@@ -66,13 +64,22 @@
                     <?php } ?> 
                 </div>
             </div>
-            
+        </form>
+
+        <?php if($seq_info) { ?>
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">提交测序</button>
+                    <include file="Seq/reports" />
+                    <include file="Seq/libs" />
                 </div>
             </div>
-        </form>
+        <?php } ?>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary" id="submit-seq-form">提交测序</button>
+            </div>
+        </div>
     </div>
 
     <include file="Public/pageFooter" />
@@ -82,14 +89,6 @@
     <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
     <script src="__JS__/time-format.js"></script>
     <script src="__JS__/seq.js"></script>
-    
-    <script>  
-        $(document).ready(function() {  
-            $('.remove-lib').on('click', function(){
-                $(this).parents('tr').detach();
-            });
-        });  
-    </script>
 
     </body>
 </html>

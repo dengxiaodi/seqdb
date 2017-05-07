@@ -37,6 +37,12 @@ class LibraryModel extends Model{
 		return false;
 	}
 
+	public function libs_by_sample_id($sample_id) {
+		return $this->where(array(
+			'sample_id' => intval($sample_id)
+		))->select();
+	}
+
 	public function add_library($library_data) {
 		$lib_id = $this->add($library_data);
 		$Sample = D('Sample');
@@ -67,9 +73,13 @@ class LibraryModel extends Model{
 
 		$library_info = $this->library_info($lib_id);
 
-		// 删除测序数据表中的相关数据
+		// 删除测序结果中的文库记录
 
-		// 删除数据表中的相关数据
+		$SeqResult = D('SeqResult');
+		$seq_results = $SeqResult->seq_results_by_lib_id($lib_id);
+		foreach ($seq_results as $seq_result) {
+			$SeqResult->delete_seq_result($seq_result['id']);
+		}
 
         $this->where(array(
         	'id' => intval($lib_id)
