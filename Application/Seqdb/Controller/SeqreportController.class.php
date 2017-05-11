@@ -23,7 +23,7 @@ class SeqreportController extends AdminController {
 		$upload->rootPath = C('SEQ_REPORT_UPLOAD.rootPath');
 		$info =  $upload->upload();
 		if(!$info) {
-			$this->error($upload->getErrorMsg());
+			$this->error($upload->getError());
 		}
 
 		foreach($info as $file){

@@ -2,10 +2,10 @@
 -- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 210.47.246.12
--- Generation Time: 2016-11-30 13:58:40
--- 服务器版本： 5.6.34
--- PHP Version: 5.6.27
+-- Host: 127.0.0.1
+-- Generation Time: 2017-05-07 09:25:55
+-- 服务器版本： 5.7.14
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `seqDB`
+-- Database: `seqdb`
 --
 
 -- --------------------------------------------------------
@@ -75,6 +75,66 @@ CREATE TABLE `onethink_action_log` (
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态',
   `create_time` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '执行行为的时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='行为日志表' ROW_FORMAT=FIXED;
+
+--
+-- 转存表中的数据 `onethink_action_log`
+--
+
+INSERT INTO `onethink_action_log` (`id`, `action_id`, `user_id`, `action_ip`, `model`, `record_id`, `remark`, `status`, `create_time`) VALUES
+(310, 1, 1, 0, 'member', 1, 'admin在2017-03-16 15:41登录了后台', 1, 1489650103),
+(311, 12, 1, 0, 'sample', 1, 'admin在2017-03-16 16:42新建一个样品', 1, 1489653760),
+(312, 12, 1, 0, 'sample', 1, 'admin在2017-03-16 16:43新建一个样品', 1, 1489653797),
+(313, 12, 1, 0, 'sample', 1, 'admin在2017-03-16 16:46新建一个样品', 1, 1489654000),
+(314, 12, 1, 0, 'sample', 1, 'admin在2017-03-16 16:57新建一个样品', 1, 1489654650),
+(315, 12, 1, 0, 'sample', 1, 'admin在2017-03-16 17:23新建一个样品', 1, 1489656230),
+(316, 1, 1, 0, 'member', 1, 'admin在2017-03-30 15:39登录了后台', 1, 1490859546),
+(317, 1, 1, 0, 'member', 1, 'admin在2017-03-30 15:45登录了后台', 1, 1490859902),
+(318, 1, 1, 0, 'member', 1, 'admin在2017-04-10 15:27登录了后台', 1, 1491809240),
+(319, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 15:27新建一个样品', 1, 1491809279),
+(320, 13, 1, 0, 'sample', 1, 'admin在2017-04-10 15:34删除一个样品', 1, 1491809691),
+(321, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 15:50新建一个样品', 1, 1491810653),
+(322, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 15:51新建一个样品', 1, 1491810686),
+(323, 13, 1, 0, 'sample', 1, 'admin在2017-04-10 15:52删除一个样品', 1, 1491810723),
+(324, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 15:59新建一个样品', 1, 1491811151),
+(325, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 16:00新建一个样品', 1, 1491811211),
+(326, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 16:00新建一个样品', 1, 1491811229),
+(327, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 16:01新建一个样品', 1, 1491811302),
+(328, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 16:11新建一个样品', 1, 1491811876),
+(329, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:21更新一个样品', 1, 1491812465),
+(330, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:21更新一个样品', 1, 1491812477),
+(331, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:21更新一个样品', 1, 1491812490),
+(332, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:28更新一个样品', 1, 1491812938),
+(333, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:29更新一个样品', 1, 1491812949),
+(334, 12, 1, 0, 'sample', 1, 'admin在2017-04-10 16:29新建一个样品', 1, 1491812966),
+(335, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:30更新一个样品', 1, 1491813014),
+(336, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:30更新一个样品', 1, 1491813021),
+(337, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:30更新一个样品', 1, 1491813044),
+(338, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:30更新一个样品', 1, 1491813058),
+(339, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:35更新一个样品', 1, 1491813332),
+(340, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:38更新一个样品', 1, 1491813513),
+(341, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:39更新一个样品', 1, 1491813544),
+(342, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:39更新一个样品', 1, 1491813580),
+(343, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:39更新一个样品', 1, 1491813592),
+(344, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:39更新一个样品', 1, 1491813597),
+(345, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:40更新一个样品', 1, 1491813604),
+(346, 14, 1, 0, 'sample', 1, 'admin在2017-04-10 16:40更新一个样品', 1, 1491813648),
+(347, 1, 1, 0, 'member', 1, 'admin在2017-04-17 15:07登录了后台', 1, 1492412844),
+(348, 1, 1, 0, 'member', 1, 'admin在2017-04-17 16:16登录了后台', 1, 1492416963),
+(349, 1, 1, 0, 'member', 1, 'admin在2017-04-27 14:14登录了后台', 1, 1493273679),
+(350, 12, 1, 0, 'sample', 1, 'admin在2017-05-02 16:00新建一个样品', 1, 1493712007),
+(351, 14, 1, 0, 'sample', 1, 'admin在2017-05-02 16:08更新一个样品', 1, 1493712537),
+(352, 14, 1, 0, 'sample', 1, 'admin在2017-05-02 16:12更新一个样品', 1, 1493712760),
+(353, 14, 1, 0, 'sample', 1, 'admin在2017-05-02 16:14更新一个样品', 1, 1493712873),
+(354, 14, 1, 0, 'sample', 1, 'admin在2017-05-02 16:14更新一个样品', 1, 1493712882),
+(355, 12, 1, 0, 'sample', 1, 'admin在2017-05-02 16:16新建一个样品', 1, 1493712964),
+(356, 12, 1, 0, 'sample', 1, 'admin在2017-05-02 16:17新建一个样品', 1, 1493713032),
+(357, 1, 1, 0, 'member', 1, 'admin在2017-05-06 20:36登录了后台', 1, 1494074182),
+(358, 1, 1, 0, 'member', 1, 'admin在2017-05-06 20:44登录了后台', 1, 1494074646),
+(359, 1, 1, 0, 'member', 1, 'admin在2017-05-06 20:44登录了后台', 1, 1494074692),
+(360, 1, 1, 0, 'member', 1, 'admin在2017-05-06 20:46登录了后台', 1, 1494074799),
+(361, 1, 1, 0, 'member', 1, 'admin在2017-05-06 20:46登录了后台', 1, 1494074819),
+(362, 12, 1, 0, 'sample', 1, 'admin在2017-05-07 17:14新建一个样品', 1, 1494148492),
+(363, 12, 1, 0, 'sample', 1, 'admin在2017-05-07 17:18新建一个样品', 1, 1494148716);
 
 -- --------------------------------------------------------
 
@@ -856,38 +916,6 @@ INSERT INTO `onethink_config` (`id`, `name`, `type`, `title`, `group`, `extra`, 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `onethink_data`
---
-
-CREATE TABLE `onethink_data` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT '主键',
-  `data_id` varchar(255) NOT NULL COMMENT '数据编号',
-  `lib_id` varchar(255) NOT NULL COMMENT '文库编号',
-  `seq_id` varchar(255) NOT NULL COMMENT '送样编号',
-  `sample_id` varchar(255) NOT NULL COMMENT '样品编号',
-  `md5` varchar(255) NOT NULL COMMENT 'md5检验',
-  `localpath` varchar(255) NOT NULL COMMENT '本地存储路径',
-  `cloudpath` varchar(255) NOT NULL COMMENT '云存储路径',
-  `create_time` int(10) UNSIGNED NOT NULL COMMENT '创建时间',
-  `update_time` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `comment` varchar(255) NOT NULL COMMENT '备注',
-  `operator` int(10) UNSIGNED NOT NULL COMMENT '操作人',
-  `read_length` varchar(255) NOT NULL COMMENT '读长',
-  `line_number` varchar(255) NOT NULL COMMENT '文件行数',
-  `amount` varchar(255) NOT NULL COMMENT '数据量',
-  `is_raw` int(1) UNSIGNED NOT NULL COMMENT '是否为原始数据',
-  `origin_name` varchar(255) NOT NULL COMMENT '原始文件名',
-  `new_name` varchar(255) NOT NULL COMMENT '新文件名',
-  `sample_name` varchar(255) NOT NULL COMMENT '样本名称',
-  `sample_type` varchar(255) NOT NULL COMMENT '样本类型',
-  `seqtype` varchar(255) NOT NULL COMMENT '测序类型',
-  `platform` varchar(255) NOT NULL COMMENT '测序平台',
-  `read_order` int(1) UNSIGNED NOT NULL COMMENT 'read次序'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `onethink_document`
 --
 
@@ -1016,10 +1044,9 @@ INSERT INTO `onethink_hooks` (`id`, `name`, `description`, `type`, `update_time`
 --
 
 CREATE TABLE `onethink_library` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT '主键',
-  `lib_id` varchar(15) NOT NULL COMMENT '文库编号',
-  `sample_id` varchar(15) NOT NULL COMMENT '样品编号',
-  `description` varchar(255) NOT NULL COMMENT ' 文库描述',
+  `id` int(11) UNSIGNED NOT NULL COMMENT '主键',
+  `sample_id` int(11) NOT NULL COMMENT '样本id',
+  `title` varchar(255) NOT NULL COMMENT ' 文库名称',
   `kit` varchar(255) NOT NULL COMMENT '建库试剂盒',
   `cycle_num` varchar(255) NOT NULL COMMENT 'PCR循环数',
   `template_mass` varchar(255) NOT NULL COMMENT '其实模板量',
@@ -1031,6 +1058,7 @@ CREATE TABLE `onethink_library` (
   `create_time` int(10) UNSIGNED NOT NULL COMMENT '建库时间',
   `update_time` int(10) UNSIGNED NOT NULL COMMENT '更新时间',
   `operator` int(10) UNSIGNED NOT NULL COMMENT '建库人',
+  `seqed` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否送测',
   `comment` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -1060,7 +1088,7 @@ CREATE TABLE `onethink_member` (
 --
 
 INSERT INTO `onethink_member` (`uid`, `nickname`, `sex`, `birthday`, `qq`, `score`, `login`, `reg_ip`, `reg_time`, `last_login_ip`, `last_login_time`, `status`) VALUES
-(1, 'admin', 0, '0000-00-00', '', 190, 48, 0, 1476930178, 2886795265, 1480506953, 1),
+(1, 'admin', 0, '0000-00-00', '', 250, 60, 0, 1476930178, 0, 1494074819, 1),
 (2, 'test', 0, '0000-00-00', '', 30, 16, 0, 1477329815, 0, 1477841657, -1),
 (3, 'lyhonk', 0, '0000-00-00', '', 30, 9, 0, 0, 0, 1479458261, -1),
 (4, 'Jimmy', 0, '0000-00-00', '', 20, 12, 0, 0, 3526358544, 1479789169, 1),
@@ -1279,7 +1307,6 @@ CREATE TABLE `onethink_picture` (
 
 CREATE TABLE `onethink_sample` (
   `id` int(10) UNSIGNED NOT NULL COMMENT '主键',
-  `sampleid` varchar(15) NOT NULL DEFAULT '0' COMMENT '样品编号',
   `name` varchar(255) NOT NULL COMMENT '样本名称',
   `type` varchar(255) NOT NULL COMMENT '样本类型',
   `description` varchar(255) NOT NULL COMMENT '样品描述',
@@ -1294,10 +1321,11 @@ CREATE TABLE `onethink_sample` (
   `used_volume` varchar(255) NOT NULL COMMENT '已使用核酸体积',
   `used_mass` varchar(255) NOT NULL COMMENT '已使用核酸质量',
   `rest` varchar(255) NOT NULL COMMENT '剩余核酸质量',
-  `extraction_data` int(10) UNSIGNED NOT NULL COMMENT '核酸提取时间',
+  `extraction_date` int(10) UNSIGNED NOT NULL COMMENT '核酸提取时间',
   `create_time` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   `operator` varchar(255) NOT NULL COMMENT '操作人员',
+  `lib_count` int(11) NOT NULL DEFAULT '0',
   `comment` varchar(255) NOT NULL COMMENT '备注'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -1309,32 +1337,83 @@ CREATE TABLE `onethink_sample` (
 
 CREATE TABLE `onethink_seq` (
   `id` int(10) UNSIGNED NOT NULL COMMENT '主键',
-  `seq_id` varchar(15) NOT NULL COMMENT '送样编号',
+  `title` varchar(255) NOT NULL,
   `company` varchar(100) NOT NULL COMMENT '测序公司',
   `create_time` int(10) UNSIGNED NOT NULL COMMENT '送样时间',
   `update_time` int(10) UNSIGNED NOT NULL COMMENT '更新时间',
   `operator` int(10) UNSIGNED NOT NULL COMMENT '送样人员',
   `send_date` int(10) UNSIGNED NOT NULL COMMENT '送样时间',
+  `lib_count` int(11) NOT NULL DEFAULT '0',
+  `report_count` int(11) NOT NULL DEFAULT '0',
   `comment` varchar(255) NOT NULL COMMENT '备注'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `onethink_seqlib`
+-- 表的结构 `onethink_seq_data`
 --
 
-CREATE TABLE `onethink_seqlib` (
+CREATE TABLE `onethink_seq_data` (
   `id` int(10) UNSIGNED NOT NULL COMMENT '主键',
-  `seq_id` varchar(255) NOT NULL COMMENT '送样编号',
-  `lib_id` varchar(255) NOT NULL COMMENT '文库编号',
-  `platform` varchar(255) NOT NULL COMMENT '测序平台',
-  `seqtype` varchar(255) NOT NULL COMMENT '测序类型',
-  `lib_volume` varchar(255) NOT NULL COMMENT '送样量',
-  `conc_qubit` varchar(255) NOT NULL COMMENT '公司Qubit质检浓度',
-  `conc_qpcr` varchar(255) NOT NULL COMMENT '公司qPCR质检浓度',
-  `peak` varchar(255) NOT NULL COMMENT '公司2100测得峰值',
-  `comment` varchar(255) NOT NULL COMMENT '备注'
+  `seq_result_id` int(11) NOT NULL,
+  `data_no` varchar(255) NOT NULL,
+  `raw_data` varchar(1024) DEFAULT NULL,
+  `raw_data_r1` varchar(1024) DEFAULT NULL,
+  `raw_data_r2` varchar(1024) DEFAULT NULL,
+  `clean_data` varchar(1024) DEFAULT NULL,
+  `clean_data_r1` varchar(1024) NOT NULL,
+  `clean_data_r2` varchar(1024) DEFAULT NULL,
+  `data_type` varchar(255) NOT NULL,
+  `raw_data_size` bigint(15) NOT NULL DEFAULT '0',
+  `clean_data_size` bigint(20) NOT NULL DEFAULT '0',
+  `raw_localpath` varchar(1024) DEFAULT NULL COMMENT '本地存储路径',
+  `clean_localpath` varchar(1024) DEFAULT NULL,
+  `raw_cloudpath` varchar(1024) DEFAULT NULL COMMENT '云存储路径',
+  `clean_cloudpath` varchar(1024) DEFAULT NULL,
+  `create_time` int(10) UNSIGNED NOT NULL COMMENT '创建时间',
+  `update_time` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `comment` varchar(255) DEFAULT NULL COMMENT '备注',
+  `operator` int(10) UNSIGNED NOT NULL COMMENT '操作人'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `onethink_seq_report`
+--
+
+CREATE TABLE `onethink_seq_report` (
+  `id` int(11) NOT NULL,
+  `seq_id` int(11) NOT NULL,
+  `filename` varchar(1024) NOT NULL,
+  `savepath` varchar(1024) NOT NULL,
+  `savename` varchar(1024) NOT NULL,
+  `create_time` int(11) NOT NULL,
+  `operator` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `onethink_seq_result`
+--
+
+CREATE TABLE `onethink_seq_result` (
+  `id` int(10) UNSIGNED NOT NULL COMMENT '主键',
+  `seq_id` int(11) NOT NULL COMMENT '送样编号',
+  `data_count` int(11) NOT NULL DEFAULT '0',
+  `lib_id` int(11) NOT NULL COMMENT '文库编号',
+  `platform` varchar(255) DEFAULT NULL COMMENT '测序平台',
+  `seq_type` varchar(255) DEFAULT NULL COMMENT '测序类型',
+  `lib_volume` varchar(255) DEFAULT NULL COMMENT '送样量',
+  `conc_qubit` varchar(255) DEFAULT NULL COMMENT '公司Qubit质检浓度',
+  `conc_qpcr` varchar(255) DEFAULT NULL COMMENT '公司qPCR质检浓度',
+  `peak` varchar(255) DEFAULT NULL COMMENT '公司2100测得峰值',
+  `comment` varchar(255) DEFAULT NULL COMMENT '备注',
+  `operator` int(11) DEFAULT NULL,
+  `create_time` int(11) NOT NULL,
+  `update_time` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -1393,7 +1472,7 @@ CREATE TABLE `onethink_ucenter_member` (
 --
 
 INSERT INTO `onethink_ucenter_member` (`id`, `username`, `password`, `email`, `mobile`, `reg_time`, `reg_ip`, `last_login_time`, `last_login_ip`, `update_time`, `status`) VALUES
-(1, 'admin', '0c3a96bf1ca54dbbdc59dc79153d121c', 'jimmy@cpg.site', '', 1476930178, 0, 1480506953, 2886795265, 1476930178, 1),
+(1, 'admin', '0c3a96bf1ca54dbbdc59dc79153d121c', 'jimmy@cpg.site', '', 1476930178, 0, 1494074819, 0, 1476930178, 1),
 (2, 'test', '0c3a96bf1ca54dbbdc59dc79153d121c', 'test@163.com', '', 1477329796, 0, 1477841657, 0, 1477329796, 1),
 (3, 'lyhonk', '0c3a96bf1ca54dbbdc59dc79153d121c', 'lyhonk@163.com', '', 1477550730, 0, 1479458261, 0, 1477550730, 1),
 (4, 'Jimmy', '0c3a96bf1ca54dbbdc59dc79153d121c', 'Jimmy@lyhonk.com', '', 1479671680, 0, 1479789169, 3526358544, 1479671680, 1),
@@ -1537,12 +1616,6 @@ ALTER TABLE `onethink_config`
   ADD KEY `group` (`group`);
 
 --
--- Indexes for table `onethink_data`
---
-ALTER TABLE `onethink_data`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `onethink_document`
 --
 ALTER TABLE `onethink_document`
@@ -1622,9 +1695,21 @@ ALTER TABLE `onethink_seq`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `onethink_seqlib`
+-- Indexes for table `onethink_seq_data`
 --
-ALTER TABLE `onethink_seqlib`
+ALTER TABLE `onethink_seq_data`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `onethink_seq_report`
+--
+ALTER TABLE `onethink_seq_report`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `onethink_seq_result`
+--
+ALTER TABLE `onethink_seq_result`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1681,7 +1766,7 @@ ALTER TABLE `onethink_action`
 -- 使用表AUTO_INCREMENT `onethink_action_log`
 --
 ALTER TABLE `onethink_action_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=310;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=364;
 --
 -- 使用表AUTO_INCREMENT `onethink_addons`
 --
@@ -1706,7 +1791,7 @@ ALTER TABLE `onethink_auth_group`
 -- 使用表AUTO_INCREMENT `onethink_auth_rule`
 --
 ALTER TABLE `onethink_auth_rule`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '规则id,自增主键', AUTO_INCREMENT=356;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '规则id,自增主键', AUTO_INCREMENT=357;
 --
 -- 使用表AUTO_INCREMENT `onethink_category`
 --
@@ -1722,11 +1807,6 @@ ALTER TABLE `onethink_channel`
 --
 ALTER TABLE `onethink_config`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '配置ID', AUTO_INCREMENT=38;
---
--- 使用表AUTO_INCREMENT `onethink_data`
---
-ALTER TABLE `onethink_data`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=9;
 --
 -- 使用表AUTO_INCREMENT `onethink_document`
 --
@@ -1746,7 +1826,7 @@ ALTER TABLE `onethink_hooks`
 -- 使用表AUTO_INCREMENT `onethink_library`
 --
 ALTER TABLE `onethink_library`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=16;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=39;
 --
 -- 使用表AUTO_INCREMENT `onethink_member`
 --
@@ -1771,17 +1851,27 @@ ALTER TABLE `onethink_picture`
 -- 使用表AUTO_INCREMENT `onethink_sample`
 --
 ALTER TABLE `onethink_sample`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=73;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=88;
 --
 -- 使用表AUTO_INCREMENT `onethink_seq`
 --
 ALTER TABLE `onethink_seq`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=59;
 --
--- 使用表AUTO_INCREMENT `onethink_seqlib`
+-- 使用表AUTO_INCREMENT `onethink_seq_data`
 --
-ALTER TABLE `onethink_seqlib`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=63;
+ALTER TABLE `onethink_seq_data`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=69;
+--
+-- 使用表AUTO_INCREMENT `onethink_seq_report`
+--
+ALTER TABLE `onethink_seq_report`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+--
+-- 使用表AUTO_INCREMENT `onethink_seq_result`
+--
+ALTER TABLE `onethink_seq_result`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键', AUTO_INCREMENT=192;
 --
 -- 使用表AUTO_INCREMENT `onethink_ucenter_admin`
 --

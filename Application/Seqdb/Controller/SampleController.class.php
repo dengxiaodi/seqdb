@@ -28,7 +28,6 @@ class SampleController extends AdminController {
             'used_mass' => $_POST['used_mass'],
             'rest' => $_POST['rest'],
             'extraction_date' => strtotime($_POST['extraction_date']),
-            'create_time' => time(),
             'operator' => UID,
             'comment' => $_POST['comment']
         );
@@ -36,6 +35,9 @@ class SampleController extends AdminController {
 
     public function add_sample() {
         $sample_data = $this->process_sample_data();
+        $now = time();
+        $sample_data['create_time'] = $now;
+        $sample_data['update_time'] = $now;
         $Sample = D('Sample');
         $Sample->add_sample($sample_data);
         action_log('create_sample','sample', UID, UID);
@@ -58,6 +60,7 @@ class SampleController extends AdminController {
         $sample_id = $_POST['sid'];
 
         $sample_data = $this->process_sample_data();
+        $sample_data['update_time'] = time();
         $Sample = D('Sample');
         $Sample->update_sample($sample_id, $sample_data);
 

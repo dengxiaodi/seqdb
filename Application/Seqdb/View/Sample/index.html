@@ -41,7 +41,7 @@
                                     </td>
                                     <td>{:time_format($obj['create_date'],"Y-m-d")}</td>
                                     <td>{:get_nickname($obj['operator'])}</td>
-                                    <td><a href="__URL__/update/sid/{$obj.id}">编辑</a> | <a class="remove-sample" href="__URL__/del/sid/{$obj.id}">删除</a> | <a href="{:U('Library/add?sample_id=' . intval($obj['id']))}">创建文库</a></td>
+                                    <td><a href="__URL__/update/sid/{$obj.id}">编辑</a> | <a class="remove-sample" href="__URL__/del/sid/{$obj.id}">删除</a> | <a href="{:U('Library/add?sample_id=' . intval($obj['id']))}" target="_blank">创建文库</a></td>
                                 </tr>
                             </foreach>
                         </tbody>

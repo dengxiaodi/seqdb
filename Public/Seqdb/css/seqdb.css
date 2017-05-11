@@ -229,3 +229,27 @@ label small {
 .sel-lib {
 	margin-right: 15px;
 }
+
+.data-file-upload {
+	line-height: 30px;
+    border: 1px solid #eee;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.data-file-name {
+	display: inline-block;
+	cursor: pointer;
+	width: 60%;
+	padding-left: 15px;
+}
+
+.data-file-upload .progress {
+	display: inline-block;
+    width: 20%;
+    margin: 0;
+    position: relative;
+    top: 5px;
+    margin-left: 15px;
+}

@@ -36,11 +36,11 @@ return array(
     /* 文件上传相关配置 */
     'SEQ_REPORT_UPLOAD' => array(
         'mimes'    => '', //允许上传的文件MiMe类型
-        'maxSize'  => 5*1024*1024, //上传的文件大小限制 (0-不做限制)
+        'maxSize'  => 500*1024*1024, //上传的文件大小限制 (0-不做限制)
         'exts'     => 'jpg,gif,png,jpeg,zip,rar,tar,gz,7z,doc,docx,txt,xml,pdf', //允许上传的文件后缀
         'autoSub'  => true, //自动子目录保存文件
         'subName'  => array('date', 'Y-m-d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
-        'rootPath' => './Uploads/SeqReports/', //保存根路径
+        'rootPath' => 'Uploads/SeqReports/', //保存根路径
         'savePath' => '', //保存路径
         'saveName' => array('uniqid', ''), //上传文件命名规则，[0]-函数名，[1]-参数，多个参数使用数组
         'saveExt'  => '', //文件保存后缀，空则使用原后缀

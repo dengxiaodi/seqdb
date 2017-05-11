@@ -37,18 +37,32 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Clean Data文件路径: <small class="c-gray">格式：机器:raw data `PWD`路径/文件名，例如WS01:/home/xdd/seq/data/Seq_R1.gz，必须rsync可获取</small></label>
+                                <label>Clean Data文件</label>
                                 <input type="hidden" class="form-control" name="clean_data">
-                                <input id="clean-data-r1" name="clean_data_r1" type="text" class="form-control m-b-10" placeholder="R1" value="{$seq_data_info['clean_data_r1']}">
-                                <input id="clean-data-r2" name="clean_data_r2" type="text" class="form-control" placeholder="R2" value="{$seq_data_info['clean_data_r2']}">
+                                <input type="hidden" id="clean-data-r1" name="clean_data_r1" type="text" class="form-control m-b-10" placeholder="R1" value="{$seq_data_info['clean_data_r1']}">
+                                <input type="hidden" id="clean-data-r2" name="clean_data_r2" type="text" class="form-control" placeholder="R2" value="{$seq_data_info['clean_data_r2']}">
+                                
+                                <div class="clean-data-r1">
+                                    <include file="SeqData/uploader" upload_label="R1: "/>
+                                </div>
+                                <div class="clean-data-r2">
+                                    <include file="SeqData/uploader" upload_label="R2: "/>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Raw Data文件路径: <small class="c-gray">格式：机器:raw data `PWD`路径/文件名，例如WS01:/home/xdd/seq/data/Seq_R1.gz，必须rsync可获取</small></label>
+                                <label>Raw Data文件</label>
                                 <input type="hidden" class="form-control" name="raw_data">
-                                <input id="raw-data-r1" name="raw_data_r1" type="text" class="form-control m-b-10" placeholder="R1" value="{$seq_data_info['raw_data_r1']}">
-                                <input id="raw-data-r2" name="raw_data_r2" type="text" class="form-control" placeholder="R2" value="{$seq_data_info['raw_data_r2']}">
+                                <input type="hidden" id="raw-data-r1" name="raw_data_r1" type="text" class="form-control m-b-10" placeholder="R1" value="{$seq_data_info['raw_data_r1']}">
+                                <input type="hidden" id="raw-data-r2" name="raw_data_r2" type="text" class="form-control" placeholder="R2" value="{$seq_data_info['raw_data_r2']}">
+
+                                <div class="raw-data-r1">
+                                    <include file="SeqData/uploader" upload_label="R1: "/>
+                                </div>
+                                <div class="raw-data-r2">
+                                    <include file="SeqData/uploader" upload_label="R2: "/>
+                                </div>
                             </div>
                         </div>
 
@@ -79,8 +93,8 @@
     <script>
         $(document).ready(function(){
             function toggleR2(show) {
-                var $rawDataR2 = $('#raw-data-r2');
-                var $cleanDataR2 = $('#clean-data-r2');
+                var $rawDataR2 = $('.raw-data-r2');
+                var $cleanDataR2 = $('.clean-data-r2');
 
                 $rawDataR2.toggle(show);
                 $cleanDataR2.toggle(show);
