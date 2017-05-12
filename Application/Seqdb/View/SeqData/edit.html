@@ -89,8 +89,13 @@
     <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
     <script src="__JS__/bootstrap-datetimepicker.min.js"></script>
     <script src="__JS__/time-format.js"></script>
+    <script src="__JS__/uploader.js"></script>
+    <script src="__PUBLIC__/static/webuploader/webuploader.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/static/webuploader/webuploader.css">
     
     <script>
+        var PUBLIC_PATH = "{__PUBLIC__}";
+
         $(document).ready(function(){
             function toggleR2(show) {
                 var $rawDataR2 = $('.raw-data-r2');
